@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover.filetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype
 
 class ColorFileRemover extends FileRemover {
 

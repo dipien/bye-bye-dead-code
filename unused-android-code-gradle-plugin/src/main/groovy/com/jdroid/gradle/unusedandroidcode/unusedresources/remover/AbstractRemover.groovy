@@ -1,7 +1,6 @@
-package com.github.konifar.gradle.remover.remover
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover
 
-import com.github.konifar.gradle.remover.UnusedResourcesRemoverExtension
-import com.github.konifar.gradle.remover.util.ColoredLogger
+import com.jdroid.gradle.unusedandroidcode.unusedresources.UnusedResourcesRemoverExtension
 import org.gradle.api.Project
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 

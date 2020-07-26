@@ -1,6 +1,5 @@
-package com.github.konifar.gradle.remover.remover.valuetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype
 
-import com.github.konifar.gradle.remover.remover.SearchPattern
 
 class StyleXmlValueRemover extends XmlValueRemover {
 

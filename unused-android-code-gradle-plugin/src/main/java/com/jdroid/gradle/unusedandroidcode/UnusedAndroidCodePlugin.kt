@@ -1,6 +1,6 @@
 package com.jdroid.gradle.unusedandroidcode
 
-import com.github.konifar.gradle.remover.UnusedResourcesRemoverExtension
+import com.jdroid.gradle.unusedandroidcode.unusedresources.UnusedResourcesRemoverExtension
 import com.jdroid.gradle.unusedandroidcode.commons.propertyResolver
 import com.jdroid.gradle.unusedandroidcode.unusedresources.RemoveUnusedResourcesTask
 import org.gradle.api.Plugin

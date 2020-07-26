@@ -1,10 +1,7 @@
-package com.github.konifar.gradle.remover.remover.valuetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype
 
-import com.github.konifar.gradle.remover.remover.AbstractRemover
-import com.github.konifar.gradle.remover.remover.SearchPattern
-import com.github.konifar.gradle.remover.util.ColoredLogger
-import com.github.konifar.gradle.remover.util.DirectoryMatcher
-import com.github.konifar.gradle.remover.util.ResultsReport
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.SearchPattern
 import org.jdom2.*
 import org.jdom2.input.SAXBuilder
 import org.jdom2.output.EscapeStrategy

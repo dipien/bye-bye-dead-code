@@ -1,9 +1,9 @@
-package com.github.konifar.gradle.remover
+package com.jdroid.gradle.unusedandroidcode.unusedresources
 
-import com.github.konifar.gradle.remover.remover.AbstractRemover
-import com.github.konifar.gradle.remover.remover.SearchPattern
-import com.github.konifar.gradle.remover.remover.filetype.FileRemover
-import com.github.konifar.gradle.remover.remover.valuetype.XmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.FileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.XmlValueRemover
+
 
 class UnusedResourcesRemoverExtension {
 

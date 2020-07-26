@@ -1,6 +1,5 @@
-package com.github.konifar.gradle.remover.remover.filetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype
 
-import com.github.konifar.gradle.remover.remover.SearchPattern
 
 class DrawableFileRemover extends FileRemover {
 

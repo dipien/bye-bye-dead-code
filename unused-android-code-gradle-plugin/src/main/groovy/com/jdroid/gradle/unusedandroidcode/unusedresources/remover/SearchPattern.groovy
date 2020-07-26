@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover
 
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 

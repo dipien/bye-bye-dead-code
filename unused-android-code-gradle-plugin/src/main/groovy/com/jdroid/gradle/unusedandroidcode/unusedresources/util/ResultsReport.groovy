@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.util
+package com.jdroid.gradle.unusedandroidcode.unusedresources.util
 
 class ResultsReport {
 

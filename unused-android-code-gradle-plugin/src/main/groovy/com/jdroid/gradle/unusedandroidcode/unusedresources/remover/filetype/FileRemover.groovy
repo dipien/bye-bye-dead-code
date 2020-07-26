@@ -1,10 +1,7 @@
-package com.github.konifar.gradle.remover.remover.filetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype
 
-import com.github.konifar.gradle.remover.remover.AbstractRemover
-import com.github.konifar.gradle.remover.remover.SearchPattern
-import com.github.konifar.gradle.remover.util.ColoredLogger
-import com.github.konifar.gradle.remover.util.DirectoryMatcher
-import com.github.konifar.gradle.remover.util.ResultsReport
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.SearchPattern
 
 
 class FileRemover extends AbstractRemover {

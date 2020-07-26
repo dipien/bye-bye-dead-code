@@ -1,23 +1,22 @@
 package com.jdroid.gradle.unusedandroidcode.unusedresources
 
-import com.github.konifar.gradle.remover.UnusedResourcesRemoverExtension
-import com.github.konifar.gradle.remover.remover.filetype.AnimFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.AnimatorFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.ColorFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.DrawableFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.LayoutFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.MenuFileRemover
-import com.github.konifar.gradle.remover.remover.filetype.MipmapFileRemover
-import com.github.konifar.gradle.remover.remover.valuetype.AttrXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.BoolXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.ColorXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.DimenXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.IdXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.IntegerXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.StringXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.StyleXmlValueRemover
-import com.github.konifar.gradle.remover.remover.valuetype.ThemeXmlValueRemover
-import com.github.konifar.gradle.remover.util.ResultsReport
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.AnimFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.AnimatorFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.ColorFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.DrawableFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.LayoutFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.MenuFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.MipmapFileRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.AttrXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.BoolXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.ColorXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.DimenXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.IdXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.IntegerXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.StringXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.StyleXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.ThemeXmlValueRemover
+import com.jdroid.gradle.unusedandroidcode.unusedresources.util.ResultsReport
 import org.gradle.api.Project
 
 object RemoveUnusedResourcesHelper {
@@ -68,6 +67,4 @@ object RemoveUnusedResourcesHelper {
             it.remove(project, extension)
         }
     }
-
-
 }

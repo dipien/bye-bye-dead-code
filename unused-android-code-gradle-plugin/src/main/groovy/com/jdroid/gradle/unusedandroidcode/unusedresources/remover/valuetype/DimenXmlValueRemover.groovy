@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover.valuetype
+package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype
 
 class DimenXmlValueRemover extends XmlValueRemover {
 
