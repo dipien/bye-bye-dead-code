@@ -27,7 +27,7 @@ buildscript {
         mavenCentral() // or gradlePluginPortal()
     }
     dependencies {
-        classpath("com.jdroidtools:unused-android-code-gradle-plugin:X.Y.Z")
+        classpath("com.jdroidtools.unused-android-code:X.Y.Z")
     }
 }
     

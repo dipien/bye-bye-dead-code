@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Unused Resources Remover</string>
+    <string name="used_untranslatable_in_layout" translatable="false">Used in layout</string>
+    <string name="unused_untranslatable" translatable="false">Unused</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment"
+    tools:showIn="@layout/used_in_activity_layout">
+
+    <TextView
+        style="@style/UsedInLayoutAsParentStyle2.UsedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/UsedInLayoutAsParentStyle1Child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/UsedInLayoutAsCustomStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/used_font_japanese" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/used_in_layout"
+        android:textAppearance="@style/UsedInLayoutTextAppearance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/used_untranslatable_in_layout"
+        android:textSize="@string/used_font_awesome2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="@bool/used_in_layout_bool"
+        android:fontFamily="@string/used_in_layout_font"
+        android:text="@string/used_font_awesome1"
+        android:theme="@style/UsedThemeInLayout" />
+
+    <!-- 9 patch test -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/used_in_layout_as_nine_patch_drawable" />
+
+</android.support.constraint.ConstraintLayout>

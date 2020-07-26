@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/used_in_layout_layout" />
+
+    <ImageView
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/used_in_layout_dimen"
+        app:srcCompat="@drawable/used_in_layout_drawable" />
+
+</CoordinatorLayout>
