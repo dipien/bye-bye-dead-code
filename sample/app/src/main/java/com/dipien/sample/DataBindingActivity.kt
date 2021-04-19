@@ -1,8 +1,8 @@
-package com.jdroid.gradle.unusedandroidcode.sample
+package com.dipien.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jdroid.gradle.unusedandroidcode.sample.databinding.UsedInActivityAsDatabindingLayoutBinding
+import com.dipien.sample.databinding.UsedInActivityAsDatabindingLayoutBinding
 
 class DataBindingActivity : AppCompatActivity() {
 

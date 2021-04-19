@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.sample
+package com.dipien.sample
 
 import android.content.Context
 import android.util.AttributeSet

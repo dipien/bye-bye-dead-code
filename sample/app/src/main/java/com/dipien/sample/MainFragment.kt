@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.sample
+package com.dipien.sample
 
 import android.animation.AnimatorInflater
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.sample
+package com.dipien.sample
 
 import android.os.Bundle
 import android.view.Menu
