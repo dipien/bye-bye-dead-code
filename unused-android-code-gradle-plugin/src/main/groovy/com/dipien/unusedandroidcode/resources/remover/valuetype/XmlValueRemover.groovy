@@ -1,7 +1,7 @@
 package com.dipien.unusedandroidcode.resources.remover.valuetype
 
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.SearchPattern
+import com.dipien.unusedandroidcode.resources.remover.AbstractRemover
+import com.dipien.unusedandroidcode.resources.remover.SearchPattern
 import org.jdom2.*
 import org.jdom2.input.SAXBuilder
 import org.jdom2.output.EscapeStrategy

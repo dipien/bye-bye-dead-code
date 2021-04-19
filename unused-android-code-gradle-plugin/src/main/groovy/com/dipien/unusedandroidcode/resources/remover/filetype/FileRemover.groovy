@@ -1,7 +1,7 @@
 package com.dipien.unusedandroidcode.resources.remover.filetype
 
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.SearchPattern
+import com.dipien.unusedandroidcode.resources.remover.AbstractRemover
+import com.dipien.unusedandroidcode.resources.remover.SearchPattern
 
 
 class FileRemover extends AbstractRemover {

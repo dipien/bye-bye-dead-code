@@ -14,7 +14,6 @@ buildscript {
 }
 
 dependencies {
-	compile(Libs.JDROID_JAVA_CORE)
 	implementation localGroovy()
 	implementation 'org.jdom:jdom2:2.0.6'
 	testCompile(Libs.JUNIT)

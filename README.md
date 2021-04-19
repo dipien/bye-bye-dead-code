@@ -15,7 +15,7 @@ Using the plugins DSL:
 
 ```groovy
 plugins {
-  id "com.jdroidtools:unused-android-code-gradle-plugin" version "X.Y.Z"
+  id "com.dipien:unused-android-code-gradle-plugin" version "X.Y.Z"
 }
 ```
 
@@ -27,7 +27,7 @@ buildscript {
         mavenCentral() // or gradlePluginPortal()
     }
     dependencies {
-        classpath("com.jdroidtools.unused-android-code:X.Y.Z")
+        classpath("com.dipien.unused-android-code:X.Y.Z")
     }
 }
     
