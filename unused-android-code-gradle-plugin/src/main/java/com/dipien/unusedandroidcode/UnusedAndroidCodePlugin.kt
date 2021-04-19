@@ -1,8 +1,10 @@
-package com.jdroid.gradle.unusedandroidcode
+package com.dipien.unusedandroidcode
 
+import com.dipien.unusedandroidcode.code.RemoveUnusedAndroidCodeTask
 import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
-import com.jdroid.gradle.unusedandroidcode.commons.propertyResolver
-import com.jdroid.gradle.unusedandroidcode.unusedresources.RemoveUnusedResourcesTask
+import com.dipien.unusedandroidcode.commons.propertyResolver
+import com.dipien.unusedandroidcode.resources.RemoveUnusedResourcesTask
+import com.dipien.unusedandroidcode.sourceset.CheckDebugOnProdTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

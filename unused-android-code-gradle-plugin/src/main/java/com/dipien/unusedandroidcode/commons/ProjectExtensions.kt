@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.commons
+package com.dipien.unusedandroidcode.commons
 
 import org.gradle.api.Project
 

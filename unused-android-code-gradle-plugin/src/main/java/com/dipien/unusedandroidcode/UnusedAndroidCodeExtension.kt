@@ -1,6 +1,6 @@
-package com.jdroid.gradle.unusedandroidcode
+package com.dipien.unusedandroidcode
 
-import com.jdroid.gradle.unusedandroidcode.commons.PropertyResolver
+import com.dipien.unusedandroidcode.commons.PropertyResolver
 
 open class UnusedAndroidCodeExtension(propertyResolver: PropertyResolver) {
 

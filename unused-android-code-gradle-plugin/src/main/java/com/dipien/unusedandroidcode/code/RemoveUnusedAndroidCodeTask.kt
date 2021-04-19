@@ -1,6 +1,6 @@
-package com.jdroid.gradle.unusedandroidcode
+package com.dipien.unusedandroidcode.code
 
-import com.jdroid.gradle.unusedandroidcode.commons.AbstractTask
+import com.dipien.unusedandroidcode.commons.AbstractTask
 
 open class RemoveUnusedAndroidCodeTask : AbstractTask() {
 

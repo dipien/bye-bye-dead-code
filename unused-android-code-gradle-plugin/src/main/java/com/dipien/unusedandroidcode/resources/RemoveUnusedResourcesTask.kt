@@ -1,8 +1,7 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources
+package com.dipien.unusedandroidcode.resources
 
-import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
 import com.dipien.unusedandroidcode.resources.util.ColoredLogger
-import com.jdroid.gradle.unusedandroidcode.commons.AbstractTask
+import com.dipien.unusedandroidcode.commons.AbstractTask
 
 open class RemoveUnusedResourcesTask : AbstractTask() {
 

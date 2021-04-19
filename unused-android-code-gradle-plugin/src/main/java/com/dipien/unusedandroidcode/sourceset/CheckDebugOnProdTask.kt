@@ -1,9 +1,9 @@
-package com.jdroid.gradle.unusedandroidcode
+package com.dipien.unusedandroidcode.sourceset
 
 import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
 import com.dipien.unusedandroidcode.resources.util.ResultsReport
-import com.jdroid.gradle.unusedandroidcode.commons.AbstractTask
-import com.jdroid.gradle.unusedandroidcode.unusedresources.RemoveUnusedResourcesHelper
+import com.dipien.unusedandroidcode.commons.AbstractTask
+import com.dipien.unusedandroidcode.resources.RemoveUnusedResourcesHelper
 import java.lang.RuntimeException
 
 open class CheckDebugOnProdTask : AbstractTask() {

@@ -1,6 +1,5 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources
+package com.dipien.unusedandroidcode.resources
 
-import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
 import com.dipien.unusedandroidcode.resources.remover.filetype.AnimFileRemover
 import com.dipien.unusedandroidcode.resources.remover.filetype.AnimatorFileRemover
 import com.dipien.unusedandroidcode.resources.remover.filetype.ColorFileRemover
