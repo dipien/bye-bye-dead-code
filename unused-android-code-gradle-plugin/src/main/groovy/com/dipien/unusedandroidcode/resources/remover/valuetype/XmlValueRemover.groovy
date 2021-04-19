@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype
+package com.dipien.unusedandroidcode.resources.remover.valuetype
 
 import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.AbstractRemover
 import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.SearchPattern

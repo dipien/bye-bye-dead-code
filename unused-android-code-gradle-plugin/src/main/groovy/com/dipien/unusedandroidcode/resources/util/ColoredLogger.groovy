@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources.util
+package com.dipien.unusedandroidcode.resources.util
 
 class ColoredLogger {
 

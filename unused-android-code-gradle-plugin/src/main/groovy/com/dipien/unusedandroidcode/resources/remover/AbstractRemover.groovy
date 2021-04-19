@@ -1,6 +1,6 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources.remover
+package com.dipien.unusedandroidcode.resources.remover
 
-import com.jdroid.gradle.unusedandroidcode.unusedresources.UnusedResourcesRemoverExtension
+import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
 import org.gradle.api.Project
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 

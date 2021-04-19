@@ -1,7 +1,7 @@
 package com.jdroid.gradle.unusedandroidcode
 
-import com.jdroid.gradle.unusedandroidcode.unusedresources.UnusedResourcesRemoverExtension
-import com.jdroid.gradle.unusedandroidcode.unusedresources.util.ResultsReport
+import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
+import com.dipien.unusedandroidcode.resources.util.ResultsReport
 import com.jdroid.gradle.unusedandroidcode.commons.AbstractTask
 import com.jdroid.gradle.unusedandroidcode.unusedresources.RemoveUnusedResourcesHelper
 import java.lang.RuntimeException

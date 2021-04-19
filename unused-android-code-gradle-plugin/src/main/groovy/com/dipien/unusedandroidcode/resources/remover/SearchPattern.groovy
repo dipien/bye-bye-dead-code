@@ -1,4 +1,4 @@
-package com.jdroid.gradle.unusedandroidcode.unusedresources.remover
+package com.dipien.unusedandroidcode.resources.remover
 
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 

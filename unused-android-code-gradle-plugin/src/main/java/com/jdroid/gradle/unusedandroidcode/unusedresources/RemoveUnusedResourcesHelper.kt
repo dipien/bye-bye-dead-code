@@ -1,22 +1,23 @@
 package com.jdroid.gradle.unusedandroidcode.unusedresources
 
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.AnimFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.AnimatorFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.ColorFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.DrawableFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.LayoutFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.MenuFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.filetype.MipmapFileRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.AttrXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.BoolXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.ColorXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.DimenXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.IdXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.IntegerXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.StringXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.StyleXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.remover.valuetype.ThemeXmlValueRemover
-import com.jdroid.gradle.unusedandroidcode.unusedresources.util.ResultsReport
+import com.dipien.unusedandroidcode.resources.UnusedResourcesRemoverExtension
+import com.dipien.unusedandroidcode.resources.remover.filetype.AnimFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.AnimatorFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.ColorFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.DrawableFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.LayoutFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.MenuFileRemover
+import com.dipien.unusedandroidcode.resources.remover.filetype.MipmapFileRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.AttrXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.BoolXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.ColorXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.DimenXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.IdXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.IntegerXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.StringXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.StyleXmlValueRemover
+import com.dipien.unusedandroidcode.resources.remover.valuetype.ThemeXmlValueRemover
+import com.dipien.unusedandroidcode.resources.util.ResultsReport
 import org.gradle.api.Project
 
 object RemoveUnusedResourcesHelper {
