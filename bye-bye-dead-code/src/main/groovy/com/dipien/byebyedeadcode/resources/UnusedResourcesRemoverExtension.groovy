@@ -1,17 +1,23 @@
 package com.dipien.byebyedeadcode.resources
 
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
+import com.dipien.byebyedeadcode.resources.remover.filetype.FileRemover
+import com.dipien.byebyedeadcode.resources.remover.valuetype.XmlValueRemover
+
+
 class UnusedResourcesRemoverExtension {
 
     public static final String NAME = "unusedResourcesRemover"
 
-    List<com.dipien.byebyedeadcode.resources.remover.AbstractRemover> extraRemovers = []
+    List<AbstractRemover> extraRemovers = []
 
     List<String> excludeNames = []
 
     boolean dryRun = false
 
-    com.dipien.byebyedeadcode.resources.remover.AbstractRemover createFileRemover(String fileType, String resourceName, String type = null) {
-        return new com.dipien.byebyedeadcode.resources.remover.filetype.FileRemover(fileType, resourceName, SearchPattern.Type.from(type))
+
+    AbstractRemover createFileRemover(String fileType, String resourceName, String type = null) {
+        return new FileRemover(fileType, resourceName, SearchPattern.Type.from(type))
     }
 
     /**
@@ -21,8 +27,8 @@ class UnusedResourcesRemoverExtension {
      * @param type is search regex pattern type. Ex) themes.xml should specified to Type.STYLE because it is almost same usage with styles.xml
      * @return
      */
-    com.dipien.byebyedeadcode.resources.remover.AbstractRemover createXmlValueRemover(String fileType, String resourceName, String tagName, String type = null) {
-        return new com.dipien.byebyedeadcode.resources.remover.valuetype.XmlValueRemover(fileType, resourceName, tagName, SearchPattern.Type.from(type))
+    AbstractRemover createXmlValueRemover(String fileType, String resourceName, String tagName, String type = null) {
+        return new XmlValueRemover(fileType, resourceName, tagName, SearchPattern.Type.from(type))
     }
 
 }

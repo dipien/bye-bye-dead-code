@@ -8,19 +8,19 @@ import com.dipien.byebyedeadcode.sourceset.CheckDebugOnProdTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-open class UnusedAndroidCodePlugin : Plugin<Project> {
+open class ByeByeDeadCodePlugin : Plugin<Project> {
 
     companion object {
-        const val EXTENSION_NAME = "unusedAndroidCode"
+        const val EXTENSION_NAME = "byeByeDeadCode"
     }
 
     private lateinit var project: Project
-    private lateinit var extension: UnusedAndroidCodeExtension
+    private lateinit var extension: ByeByeDeadCodeExtension
 
     override fun apply(project: Project) {
         this.project = project
 
-        extension = project.extensions.create(EXTENSION_NAME, UnusedAndroidCodeExtension::class.java, project.propertyResolver)
+        extension = project.extensions.create(EXTENSION_NAME, ByeByeDeadCodeExtension::class.java, project.propertyResolver)
 
         project.extensions.create(UnusedResourcesRemoverExtension.NAME, UnusedResourcesRemoverExtension::class.java)
 

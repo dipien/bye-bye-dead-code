@@ -1,6 +1,6 @@
 version = '1.0.0'
 
-ext.GITHUB_REPOSITORY_NAME = "unused-android-code-gradle-plugin"
+ext.GITHUB_REPOSITORY_NAME = "bye-bye-dead-code"
 
 apply plugin: "com.dipien.component.builder"
 apply plugin: 'com.jdroidtools.root'

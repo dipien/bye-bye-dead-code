@@ -1,9 +1,9 @@
-ext.PROJECT_NAME = "Unused Android Code Gradle Plugin"
-description = "Template Plugin Description"
-ext.ARTIFACT_ID = "unused-android-code-gradle-plugin"
-ext.GRADLE_PLUGIN_ID = "com.dipien.unused-android-code"
-ext.GRADLE_PLUGIN_IMPLEMENTATION_CLASS = "com.dipien.unusedandroidcode.UnusedAndroidCodePlugin"
-ext.GRADLE_PLUGIN_PORTAL_TAGS = ["gradle", "plugin", "android"]
+ext.PROJECT_NAME = "Bye Bye Dead Code"
+description = "Gradle Plugin to automatically detect unused code on your Kotlin or Android project"
+ext.ARTIFACT_ID = "bye-bye-dead-code"
+ext.GRADLE_PLUGIN_ID = "com.dipien.bye-bye-dead-code"
+ext.GRADLE_PLUGIN_IMPLEMENTATION_CLASS = "com.dipien.byebyedeadcode.ByeByeDeadCodePlugin"
+ext.GRADLE_PLUGIN_PORTAL_TAGS = ["gradle", "plugin", "android", "dead-code", "kotlin"]
 
 apply plugin: "com.jdroidtools.gradle.plugin"
 
