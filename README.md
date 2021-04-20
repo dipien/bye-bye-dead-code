@@ -5,9 +5,8 @@
 Gradle Plugin to automatically detect unused code on your Kotlin or Android project
 
 ## Features
-- Easy to remove unused resources by simple gradle command
-- Customize extra/exclude files configuration
-- Support DataBinding & Multi module project
+
+// TODO
 
 ## Setup
 
