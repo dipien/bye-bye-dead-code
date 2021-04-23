@@ -16,5 +16,4 @@ open class GenerateDeadAndroidCodeReportExt {
     var compiledKotlinClassesDir = "build/tmp/kotlin-classes/release"
     var compiledJavaClassesDir = "build/intermediates/javac/release"
     var generatedClassesDir = "build/generated/source/kapt/release"
-
 }

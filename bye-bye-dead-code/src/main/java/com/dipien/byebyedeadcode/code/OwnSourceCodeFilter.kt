@@ -7,12 +7,14 @@ import java.io.File
 /**
  * Filters out kapt and library classes.
  */
-class OwnSourceCodeFilter(project : Project,
-                          private val compiledKotlinClassesDir : String,
-                          private val compiledJavaClassesDir : String,
-                          private val generatedClassesDir : String) : DeadCodeFilter {
+class OwnSourceCodeFilter(
+    project: Project,
+    private val compiledKotlinClassesDir: String,
+    private val compiledJavaClassesDir: String,
+    private val generatedClassesDir: String
+) : DeadCodeFilter {
 
-    private val moduleNames : List<String>
+    private val moduleNames: List<String>
 
     init {
         val names = mutableListOf<String>()
@@ -23,21 +25,21 @@ class OwnSourceCodeFilter(project : Project,
     }
 
     override fun filter(deadCode: DeadCode): DeadCode? {
-        var result : DeadCode? = null
+        var result: DeadCode? = null
 
         // For nested or inner classes if the root class is in the src directory then
         // the inner or nested class too. So, we are just going to check the root class.
         val classPath = deadCode.rootClassNameToPathAnnotation()
         moduleNames.forEach { moduleName ->
             // Kotlin
-            if (File("${moduleName}/${compiledKotlinClassesDir}/${classPath}.class").exists()
-                    && !File("${moduleName}/${generatedClassesDir}/${classPath}.kt").exists()) {
+            if (File("$moduleName/$compiledKotlinClassesDir/$classPath.class").exists() &&
+                    !File("$moduleName/$generatedClassesDir/$classPath.kt").exists()) {
                 result = deadCode
                 return@forEach
             }
             // Java
-            if(File("${moduleName}/${compiledJavaClassesDir}/${classPath}.class").exists()
-                    && !File("${moduleName}/${generatedClassesDir}/${classPath}.java").exists()) {
+            if (File("$moduleName/$compiledJavaClassesDir/$classPath.class").exists() &&
+                    !File("$moduleName/$generatedClassesDir/$classPath.java").exists()) {
                 result = deadCode
                 return@forEach
             }

@@ -7,6 +7,5 @@ package com.dipien.byebyedeadcode.code
  */
 interface DeadCodeFilter {
 
-    fun filter(deadCode: DeadCode) : DeadCode?
-
+    fun filter(deadCode: DeadCode): DeadCode?
 }

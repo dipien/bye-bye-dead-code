@@ -2,14 +2,14 @@ package com.dipien.byebyedeadcode.code
 
 import java.io.File
 
-class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
+class ReportGenerator(private val deadCodeFilterHelper: DeadCodeFilterHelper) {
 
     private val usageFileParser = UsageFileParser()
 
     private val deadClasses = mutableListOf<DeadCode>()
     private val classesWithDeadCode = mutableListOf<DeadCode>()
 
-    fun generate(usagePath : String, reportPath : String) {
+    fun generate(usagePath: String, reportPath: String) {
         removeReportFile(reportPath)
         File(usagePath).forEachLine { line ->
             usageFileParser.parse(line)
@@ -21,7 +21,7 @@ class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
         writeReport(reportPath)
     }
 
-    private fun process(deadCode : DeadCode) {
+    private fun process(deadCode: DeadCode) {
         val filteredDeadCode = deadCodeFilterHelper.filter(deadCode)
         filteredDeadCode?.let {
             // If class has not members then it is a dead class and can be completely removed
@@ -33,14 +33,14 @@ class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
         }
     }
 
-    private fun removeReportFile(reportPath : String) {
+    private fun removeReportFile(reportPath: String) {
         val file = File(reportPath)
         if (file.exists()) {
             file.delete()
         }
     }
 
-    private fun createReportFile(reportPath : String) : File {
+    private fun createReportFile(reportPath: String): File {
         val reportFile = File(reportPath)
         val dir = reportFile.parentFile
         if (dir != null && !dir.exists()) {
@@ -50,7 +50,7 @@ class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
         return reportFile
     }
 
-    private fun writeReport(reportPath : String) {
+    private fun writeReport(reportPath: String) {
         val reportFile = createReportFile(reportPath)
         deadClasses.sortBy { it.className }
         classesWithDeadCode.sortBy { it.className }
@@ -62,7 +62,7 @@ class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
         }
     }
 
-    private fun writeReport(reportFile : File, deadCode : DeadCode) {
+    private fun writeReport(reportFile: File, deadCode: DeadCode) {
         reportFile.appendText(deadCode.className)
         reportFile.appendText(System.lineSeparator())
         deadCode.classMembers.forEach { member ->
@@ -70,5 +70,4 @@ class ReportGenerator(private val deadCodeFilterHelper : DeadCodeFilterHelper) {
             reportFile.appendText(System.lineSeparator())
         }
     }
-
 }
