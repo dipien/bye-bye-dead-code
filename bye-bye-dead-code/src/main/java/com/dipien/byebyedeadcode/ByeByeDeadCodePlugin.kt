@@ -1,6 +1,7 @@
 package com.dipien.byebyedeadcode
 
-import com.dipien.byebyedeadcode.code.RemoveUnusedAndroidCodeTask
+import com.dipien.byebyedeadcode.code.GenerateDeadAndroidCodeReportExt
+import com.dipien.byebyedeadcode.code.GenerateDeadAndroidCodeReportTask
 import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
 import com.dipien.byebyedeadcode.commons.propertyResolver
 import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesTask
@@ -24,8 +25,10 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
 
         project.extensions.create(UnusedResourcesRemoverExtension.NAME, UnusedResourcesRemoverExtension::class.java)
 
-        project.tasks.create(RemoveUnusedAndroidCodeTask.TASK_NAME, RemoveUnusedAndroidCodeTask::class.java)
         project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
         project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
+
+        project.extensions.create(GenerateDeadAndroidCodeReportExt.NAME, GenerateDeadAndroidCodeReportExt::class.java)
+        project.tasks.create(GenerateDeadAndroidCodeReportTask.TASK_NAME, GenerateDeadAndroidCodeReportTask::class.java)
     }
 }
