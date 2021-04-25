@@ -1,8 +1,13 @@
 package com.dipien.byebyedeadcode
 
 import com.dipien.byebyedeadcode.commons.PropertyResolver
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 
 open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
 
-    var sample: String = propertyResolver.getRequiredStringProp(::sample.name, "sample")
+    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+
+    var unusedResourcesExcludeNames: List<String> = emptyList()
+
+    var dryRun: Boolean = propertyResolver.getRequiredBooleanProp(::dryRun.name, false)
 }

@@ -1,7 +1,9 @@
 package com.dipien.byebyedeadcode.resources
 
+import com.dipien.byebyedeadcode.ByeByeDeadCodeExtension
 import com.dipien.byebyedeadcode.resources.util.ColoredLogger
 import com.dipien.byebyedeadcode.commons.AbstractTask
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 
 open class RemoveUnusedResourcesTask : AbstractTask() {
 
@@ -14,26 +16,26 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
     }
 
     override fun onExecute() {
-        val unusedResourcesRemoverExtension = project.extensions.findByType(UnusedResourcesRemoverExtension::class.java)!!
-        logExtensionInfo(unusedResourcesRemoverExtension)
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
+        val extension: ByeByeDeadCodeExtension = project.extensions.findByType(ByeByeDeadCodeExtension::class.java)!!
+        logExtensionInfo(extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
+        RemoveUnusedResourcesHelper.remove(project, extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
     }
 
-    private fun logExtensionInfo(extension: UnusedResourcesRemoverExtension) {
-        if (extension.extraRemovers.size > 0) {
+    private fun logExtensionInfo(dryRun: Boolean, excludeNames: List<String>, extraRemovers: List<AbstractRemover>) {
+        if (extraRemovers.isNotEmpty()) {
             ColoredLogger.log("extraRemovers:")
-            extension.extraRemovers.forEach {
+            extraRemovers.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        if (extension.excludeNames.size > 0) {
+        if (excludeNames.isNotEmpty()) {
             ColoredLogger.log("excludeNames:")
-            extension.excludeNames.forEach {
+            excludeNames.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        ColoredLogger.log("dryRun: ${extension.dryRun}")
+        ColoredLogger.log("dryRun: $dryRun")
     }
 }

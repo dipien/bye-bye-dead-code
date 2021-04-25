@@ -1,5 +1,6 @@
 package com.dipien.byebyedeadcode.resources
 
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 import com.dipien.byebyedeadcode.resources.remover.filetype.AnimFileRemover
 import com.dipien.byebyedeadcode.resources.remover.filetype.AnimatorFileRemover
 import com.dipien.byebyedeadcode.resources.remover.filetype.ColorFileRemover
@@ -21,19 +22,19 @@ import org.gradle.api.Project
 
 object RemoveUnusedResourcesHelper {
 
-    fun remove(project: Project, extension: UnusedResourcesRemoverExtension) {
+    fun remove(project: Project, dryRun: Boolean, excludeNames: List<String>, extraRemovers: List<AbstractRemover>) {
 
         ResultsReport.clearResults()
 
-        removeInternal(project, extension)
+        removeInternal(project, dryRun, excludeNames, extraRemovers)
 
         // TODO We call it again to find more unused resources. Improve this
         if (ResultsReport.getResults().isNotEmpty()) {
-            removeInternal(project, extension)
+            removeInternal(project, dryRun, excludeNames, extraRemovers)
         }
     }
 
-    private fun removeInternal(project: Project, extension: UnusedResourcesRemoverExtension) {
+    private fun removeInternal(project: Project, dryRun: Boolean, excludeNames: List<String>, extraRemovers: List<AbstractRemover>) {
         // Remove unused files
         listOf(
                 LayoutFileRemover(),
@@ -44,7 +45,7 @@ object RemoveUnusedResourcesHelper {
                 AnimFileRemover(),
                 ColorFileRemover()
         ).forEach {
-            it.remove(project, extension)
+            it.remove(project, dryRun, excludeNames)
         }
 
         // Remove unused xml values
@@ -59,12 +60,12 @@ object RemoveUnusedResourcesHelper {
                 IdXmlValueRemover(),
                 AttrXmlValueRemover()
         ).forEach {
-            it.remove(project, extension)
+            it.remove(project, dryRun, excludeNames)
         }
 
         // Remove files or xml values in extra setting
-        extension.extraRemovers.forEach {
-            it.remove(project, extension)
+        extraRemovers.forEach {
+            it.remove(project, dryRun, excludeNames)
         }
     }
 }
