@@ -1,9 +1,10 @@
 package com.dipien.byebyedeadcode.resources
 
-import com.dipien.byebyedeadcode.ByeByeDeadCodeExtension
 import com.dipien.byebyedeadcode.resources.util.ColoredLogger
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
 
 open class RemoveUnusedResourcesTask : AbstractTask() {
 
@@ -15,27 +16,31 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
         description = "Remove unused android resources"
     }
 
-    override fun onExecute() {
-        val extension: ByeByeDeadCodeExtension = project.extensions.findByType(ByeByeDeadCodeExtension::class.java)!!
-        logExtensionInfo(extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
-        RemoveUnusedResourcesHelper.remove(project, extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
-    }
+    @get:Input
+    @get:Optional
+    var unusedResourcesExcludeNames: List<String> = emptyList()
 
-    private fun logExtensionInfo(dryRun: Boolean, excludeNames: List<String>, extraRemovers: List<AbstractRemover>) {
-        if (extraRemovers.isNotEmpty()) {
+    @get:Input
+    @get:Optional
+    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+
+    override fun onExecute() {
+        if (unusedResourcesExcludeNames.isNotEmpty()) {
             ColoredLogger.log("extraRemovers:")
-            extraRemovers.forEach {
+            unusedResourcesExcludeNames.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        if (excludeNames.isNotEmpty()) {
+        if (unusedResourcesExcludeNames.isNotEmpty()) {
             ColoredLogger.log("excludeNames:")
-            excludeNames.forEach {
+            unusedResourcesExcludeNames.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
         ColoredLogger.log("dryRun: $dryRun")
+
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, extraUnusedResourcesRemovers)
     }
 }
