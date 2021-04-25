@@ -25,9 +25,9 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
     var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
 
     override fun onExecute() {
-        if (unusedResourcesExcludeNames.isNotEmpty()) {
+        if (extraUnusedResourcesRemovers.isNotEmpty()) {
             ColoredLogger.log("extraRemovers:")
-            unusedResourcesExcludeNames.forEach {
+            extraUnusedResourcesRemovers.forEach {
                 ColoredLogger.log("  $it")
             }
         }
