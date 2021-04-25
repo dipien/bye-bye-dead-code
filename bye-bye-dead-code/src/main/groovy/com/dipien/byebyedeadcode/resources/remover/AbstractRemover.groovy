@@ -1,6 +1,7 @@
 package com.dipien.byebyedeadcode.resources.remover
 
 import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
+import com.dipien.byebyedeadcode.resources.util.ColoredLogger
 import org.gradle.api.Project
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 

@@ -2,6 +2,9 @@ package com.dipien.byebyedeadcode.resources.remover.filetype
 
 import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 import com.dipien.byebyedeadcode.resources.remover.SearchPattern
+import com.dipien.byebyedeadcode.resources.util.ColoredLogger
+import com.dipien.byebyedeadcode.resources.util.DirectoryMatcher
+import com.dipien.byebyedeadcode.resources.util.ResultsReport
 
 
 class FileRemover extends AbstractRemover {
