@@ -1,6 +1,6 @@
 package com.dipien.byebyedeadcode.sourceset
 
-import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
+import com.dipien.byebyedeadcode.ByeByeDeadCodeExtension
 import com.dipien.byebyedeadcode.resources.util.ResultsReport
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesHelper
@@ -18,8 +18,8 @@ open class CheckDebugOnProdTask : AbstractTask() {
 
     override fun onExecute() {
 
-        val unusedResourcesRemoverExtension = project.extensions.findByType(UnusedResourcesRemoverExtension::class.java)!!
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
+        val extension: ByeByeDeadCodeExtension = project.extensions.findByType(ByeByeDeadCodeExtension::class.java)!!
+        RemoveUnusedResourcesHelper.remove(project, extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
 
         // Remove all the non production code
         project.rootProject.allprojects.forEach {
@@ -28,7 +28,7 @@ open class CheckDebugOnProdTask : AbstractTask() {
             it.file("src/androidTest").deleteRecursively()
         }
 
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
+        RemoveUnusedResourcesHelper.remove(project, extension.dryRun, extension.unusedResourcesExcludeNames, extension.extraUnusedResourcesRemovers)
 
         if (ResultsReport.getResults().isNotEmpty()) {
             project.logger.warn("**********************************************************************")
