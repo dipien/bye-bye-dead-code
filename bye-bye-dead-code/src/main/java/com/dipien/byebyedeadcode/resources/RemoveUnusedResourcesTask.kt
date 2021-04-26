@@ -2,6 +2,9 @@ package com.dipien.byebyedeadcode.resources
 
 import com.dipien.byebyedeadcode.resources.util.ColoredLogger
 import com.dipien.byebyedeadcode.commons.AbstractTask
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
 
 open class RemoveUnusedResourcesTask : AbstractTask() {
 
@@ -13,27 +16,31 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
         description = "Remove unused android resources"
     }
 
+    @get:Input
+    @get:Optional
+    var unusedResourcesExcludeNames: List<String> = emptyList()
+
+    @get:Input
+    @get:Optional
+    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+
     override fun onExecute() {
-        val unusedResourcesRemoverExtension = project.extensions.findByType(UnusedResourcesRemoverExtension::class.java)!!
-        logExtensionInfo(unusedResourcesRemoverExtension)
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
-    }
-
-    private fun logExtensionInfo(extension: UnusedResourcesRemoverExtension) {
-        if (extension.extraRemovers.size > 0) {
+        if (extraUnusedResourcesRemovers.isNotEmpty()) {
             ColoredLogger.log("extraRemovers:")
-            extension.extraRemovers.forEach {
+            extraUnusedResourcesRemovers.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        if (extension.excludeNames.size > 0) {
+        if (unusedResourcesExcludeNames.isNotEmpty()) {
             ColoredLogger.log("excludeNames:")
-            extension.excludeNames.forEach {
+            unusedResourcesExcludeNames.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        ColoredLogger.log("dryRun: ${extension.dryRun}")
+        ColoredLogger.log("dryRun: $dryRun")
+
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, extraUnusedResourcesRemovers)
     }
 }

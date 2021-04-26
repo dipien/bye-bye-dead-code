@@ -11,6 +11,9 @@ abstract class AbstractTask : DefaultTask() {
     @get:Input
     var verbose = false
 
+    @get:Input
+    var dryRun = false
+
     @get:Internal
     protected lateinit var commandExecutor: CommandExecutor
 

@@ -1,9 +1,11 @@
 package com.dipien.byebyedeadcode.sourceset
 
-import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
 import com.dipien.byebyedeadcode.resources.util.ResultsReport
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesHelper
+import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
 import java.lang.RuntimeException
 
 open class CheckDebugOnProdTask : AbstractTask() {
@@ -16,10 +18,17 @@ open class CheckDebugOnProdTask : AbstractTask() {
         description = "Check if there are debug resources on main or release source sets"
     }
 
+    @get:Input
+    @get:Optional
+    var unusedResourcesExcludeNames: List<String> = emptyList()
+
+    @get:Input
+    @get:Optional
+    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+
     override fun onExecute() {
 
-        val unusedResourcesRemoverExtension = project.extensions.findByType(UnusedResourcesRemoverExtension::class.java)!!
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, extraUnusedResourcesRemovers)
 
         // Remove all the non production code
         project.rootProject.allprojects.forEach {
@@ -28,7 +37,7 @@ open class CheckDebugOnProdTask : AbstractTask() {
             it.file("src/androidTest").deleteRecursively()
         }
 
-        RemoveUnusedResourcesHelper.remove(project, unusedResourcesRemoverExtension)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, extraUnusedResourcesRemovers)
 
         if (ResultsReport.getResults().isNotEmpty()) {
             project.logger.warn("**********************************************************************")

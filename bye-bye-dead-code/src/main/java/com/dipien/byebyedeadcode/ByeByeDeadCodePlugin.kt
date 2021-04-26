@@ -1,8 +1,7 @@
 package com.dipien.byebyedeadcode
 
-import com.dipien.byebyedeadcode.code.GenerateDeadAndroidCodeReportExt
 import com.dipien.byebyedeadcode.code.GenerateDeadAndroidCodeReportTask
-import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
+import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.propertyResolver
 import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesTask
 import com.dipien.byebyedeadcode.sourceset.CheckDebugOnProdTask
@@ -23,12 +22,27 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
 
         extension = project.extensions.create(EXTENSION_NAME, ByeByeDeadCodeExtension::class.java, project.propertyResolver)
 
-        project.extensions.create(UnusedResourcesRemoverExtension.NAME, UnusedResourcesRemoverExtension::class.java)
+        val removeUnusedAndroidCodeTask = project.tasks.create(GenerateDeadAndroidCodeReportTask.TASK_NAME, RemoveUnusedAndroidCodeTask::class.java)
+        project.afterEvaluate {
+            init(removeUnusedAndroidCodeTask, extension)
+        }
 
-        project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
-        project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
+        val removeUnusedResourcesTask: RemoveUnusedResourcesTask = project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
+        project.afterEvaluate {
+            init(removeUnusedResourcesTask, extension)
+            removeUnusedResourcesTask.extraUnusedResourcesRemovers = extension.extraUnusedResourcesRemovers
+            removeUnusedResourcesTask.unusedResourcesExcludeNames = extension.unusedResourcesExcludeNames
+        }
 
-        project.extensions.create(GenerateDeadAndroidCodeReportExt.NAME, GenerateDeadAndroidCodeReportExt::class.java)
-        project.tasks.create(GenerateDeadAndroidCodeReportTask.TASK_NAME, GenerateDeadAndroidCodeReportTask::class.java)
+        val checkDebugOnProdTask = project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
+        project.afterEvaluate {
+            init(checkDebugOnProdTask, extension)
+            checkDebugOnProdTask.extraUnusedResourcesRemovers = extension.extraUnusedResourcesRemovers
+            checkDebugOnProdTask.unusedResourcesExcludeNames = extension.unusedResourcesExcludeNames
+        }
+    }
+
+    private fun init(task: AbstractTask, extension: ByeByeDeadCodeExtension) {
+        task.dryRun = extension.dryRun
     }
 }

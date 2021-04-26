@@ -1,6 +1,7 @@
 package com.dipien.byebyedeadcode.resources.remover
 
-import com.dipien.byebyedeadcode.resources.UnusedResourcesRemoverExtension
+
+import com.dipien.byebyedeadcode.resources.util.ColoredLogger
 import org.gradle.api.Project
 import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 
@@ -47,9 +48,9 @@ abstract class AbstractRemover {
         return SearchPattern.create(resourceName, target, type)
     }
 
-    void remove(Project project, UnusedResourcesRemoverExtension extension) {
-        this.dryRun = extension.dryRun
-        this.excludeNames = extension.excludeNames
+    void remove(Project project, boolean dryRun, List<String> excludeNames) {
+        this.dryRun = dryRun
+        this.excludeNames = excludeNames
 
         List<String> moduleSrcDirs = project.rootProject.allprojects
                 .findAll { it.name != project.rootProject.name }
