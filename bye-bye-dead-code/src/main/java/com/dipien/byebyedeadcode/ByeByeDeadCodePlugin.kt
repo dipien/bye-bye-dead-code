@@ -1,6 +1,6 @@
 package com.dipien.byebyedeadcode
 
-import com.dipien.byebyedeadcode.code.GenerateDeadAndroidCodeReportTask
+import com.dipien.byebyedeadcode.code.GenerateDeadCodeReportTask
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.propertyResolver
 import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesTask
@@ -22,9 +22,14 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
 
         extension = project.extensions.create(EXTENSION_NAME, ByeByeDeadCodeExtension::class.java, project.propertyResolver)
 
-        val removeUnusedAndroidCodeTask = project.tasks.create(GenerateDeadAndroidCodeReportTask.TASK_NAME, RemoveUnusedAndroidCodeTask::class.java)
+        val generateDeadCodeReportTask = project.tasks.create(GenerateDeadCodeReportTask.TASK_NAME, GenerateDeadCodeReportTask::class.java)
         project.afterEvaluate {
-            init(removeUnusedAndroidCodeTask, extension)
+            init(generateDeadCodeReportTask, extension)
+            generateDeadCodeReportTask.proguardUsageFilePath = extension.proguardUsageFilePath
+            generateDeadCodeReportTask.reportFilePath = extension.reportFilePath
+            generateDeadCodeReportTask.compiledKotlinClassesDir = extension.compiledKotlinClassesDir
+            generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
+            generateDeadCodeReportTask.generatedClassesDir = extension.generatedClassesDir
         }
 
         val removeUnusedResourcesTask: RemoveUnusedResourcesTask = project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
@@ -44,5 +49,6 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
 
     private fun init(task: AbstractTask, extension: ByeByeDeadCodeExtension) {
         task.dryRun = extension.dryRun
+        task.verbose = extension.verbose
     }
 }

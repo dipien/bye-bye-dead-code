@@ -9,16 +9,16 @@ class ReportGenerator(private val deadCodeFilterHelper: DeadCodeFilterHelper) {
     private val deadClasses = mutableListOf<DeadCode>()
     private val classesWithDeadCode = mutableListOf<DeadCode>()
 
-    fun generate(usagePath: String, reportPath: String) {
-        removeReportFile(reportPath)
-        File(usagePath).forEachLine { line ->
+    fun generate(usageFilePath: String, reportFilePath: String) {
+        removeReportFile(reportFilePath)
+        File(usageFilePath).forEachLine { line ->
             usageFileParser.parse(line)
             usageFileParser.next()?.let { deadCode ->
                 process(deadCode)
             }
         }
         process(usageFileParser.next(true)!!)
-        writeReport(reportPath)
+        writeReport(reportFilePath)
     }
 
     private fun process(deadCode: DeadCode) {
@@ -33,15 +33,15 @@ class ReportGenerator(private val deadCodeFilterHelper: DeadCodeFilterHelper) {
         }
     }
 
-    private fun removeReportFile(reportPath: String) {
-        val file = File(reportPath)
+    private fun removeReportFile(reportFilePath: String) {
+        val file = File(reportFilePath)
         if (file.exists()) {
             file.delete()
         }
     }
 
-    private fun createReportFile(reportPath: String): File {
-        val reportFile = File(reportPath)
+    private fun createReportFile(reportFilePath: String): File {
+        val reportFile = File(reportFilePath)
         val dir = reportFile.parentFile
         if (dir != null && !dir.exists()) {
             dir.mkdirs()
@@ -50,8 +50,8 @@ class ReportGenerator(private val deadCodeFilterHelper: DeadCodeFilterHelper) {
         return reportFile
     }
 
-    private fun writeReport(reportPath: String) {
-        val reportFile = createReportFile(reportPath)
+    private fun writeReport(reportFilePath: String) {
+        val reportFile = createReportFile(reportFilePath)
         deadClasses.sortBy { it.className }
         classesWithDeadCode.sortBy { it.className }
         deadClasses.forEach {
