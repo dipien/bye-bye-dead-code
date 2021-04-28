@@ -9,4 +9,3 @@ wiki/**
 .gitattributes
 .github/**
 .idea/**
-.DS_Store
