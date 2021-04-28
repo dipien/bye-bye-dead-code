@@ -9,9 +9,9 @@ class DeadCodeFilterHelper(
     generatedClassesDir: String
 ) {
 
-    private val filters = listOf<DeadCodeFilter>(
-            OwnSourceCodeFilter(project, compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir)
-            // TODO add filters
+    private val filters = listOf(
+            OwnSourceCodeFilter(project, compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir),
+            CompilerCodeFilter()
     )
 
     fun filter(deadCode: DeadCode): DeadCode? {
