@@ -9,6 +9,9 @@ import org.gradle.api.tasks.TaskAction
 abstract class AbstractTask : DefaultTask() {
 
     @get:Input
+    var verbose = false
+
+    @get:Input
     var dryRun = false
 
     @get:Internal
@@ -20,6 +23,9 @@ abstract class AbstractTask : DefaultTask() {
 
     @TaskAction
     fun doExecute() {
+        LoggerHelper.logger = logger
+        LoggerHelper.verbose = verbose
+
         commandExecutor = CommandExecutorImpl(project, LogLevel.LIFECYCLE)
         onExecute()
     }
