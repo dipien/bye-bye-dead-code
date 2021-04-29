@@ -8,19 +8,6 @@ class CompilerCodeFilter : DeadCodeFilter {
         const val ANONYMOUS_CLASS = ".+\\\$\\d+\$"
         // e.g: 'com.example.MyInterface$DefaultImpls'
         const val DEFAULT_IMPLES = ".+\\\$DefaultImpls\$"
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            foo()
-        }
-
-        fun foo() {
-            listOf(1, 2, 3, 4, 5).forEach lit@{
-                if (it == 3) return@lit // local return to the caller of the lambda - the forEach loop
-                print(it)
-            }
-            print(" done with explicit label")
-        }
     }
 
     private val filters = listOf(
