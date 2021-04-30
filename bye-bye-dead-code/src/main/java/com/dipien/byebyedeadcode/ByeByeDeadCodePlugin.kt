@@ -3,7 +3,7 @@ package com.dipien.byebyedeadcode
 import com.dipien.byebyedeadcode.code.GenerateDeadCodeReportTask
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.propertyResolver
-import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesTask
+import com.dipien.byebyedeadcode.resources.RemoveUnusedAndroidResourcesTask
 import com.dipien.byebyedeadcode.sourceset.CheckDebugOnProdTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,7 +22,7 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
 
         extension = project.extensions.create(EXTENSION_NAME, ByeByeDeadCodeExtension::class.java, project.propertyResolver)
 
-        val generateDeadCodeReportTask = project.tasks.create(GenerateDeadCodeReportTask.TASK_NAME, GenerateDeadCodeReportTask::class.java)
+        val generateDeadCodeReportTask: GenerateDeadCodeReportTask = project.tasks.create(GenerateDeadCodeReportTask.TASK_NAME, GenerateDeadCodeReportTask::class.java)
         project.afterEvaluate {
             init(generateDeadCodeReportTask, extension)
             generateDeadCodeReportTask.proguardUsageFilePath = extension.proguardUsageFilePath
@@ -32,18 +32,18 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.generatedClassesDir = extension.generatedClassesDir
         }
 
-        val removeUnusedResourcesTask: RemoveUnusedResourcesTask = project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
+        val removeUnusedResourcesTask: RemoveUnusedAndroidResourcesTask = project.tasks.create(RemoveUnusedAndroidResourcesTask.TASK_NAME, RemoveUnusedAndroidResourcesTask::class.java)
         project.afterEvaluate {
             init(removeUnusedResourcesTask, extension)
-            removeUnusedResourcesTask.extraUnusedResourcesRemovers = extension.extraUnusedResourcesRemovers
-            removeUnusedResourcesTask.unusedResourcesExcludeNames = extension.unusedResourcesExcludeNames
+            removeUnusedResourcesTask.unusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
+            removeUnusedResourcesTask.unusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
         }
 
-        val checkDebugOnProdTask = project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
+        val checkDebugOnProdTask: CheckDebugOnProdTask = project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
         project.afterEvaluate {
             init(checkDebugOnProdTask, extension)
-            checkDebugOnProdTask.extraUnusedResourcesRemovers = extension.extraUnusedResourcesRemovers
-            checkDebugOnProdTask.unusedResourcesExcludeNames = extension.unusedResourcesExcludeNames
+            checkDebugOnProdTask.unusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
+            checkDebugOnProdTask.unusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
         }
     }
 

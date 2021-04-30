@@ -7,9 +7,9 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
 
     var verbose = false
 
-    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+    var androidUnusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
 
-    var unusedResourcesExcludeNames: List<String> = emptyList()
+    var androidUnusedResourcesExcludeNames: List<String> = emptyList()
 
     var dryRun: Boolean = propertyResolver.getRequiredBooleanProp(::dryRun.name, false)
 

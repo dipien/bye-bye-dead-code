@@ -29,6 +29,16 @@ apply plugin: "com.dipien.bye-bye-dead-code"
 
 // TODO
 
+### Tasks
+
+#### Remove unused Android resources
+
+Remove unused Android resources
+
+```
+./gradlew removeUnusedAndroidResources
+```
+
 ## Copyright
 
 Part of the source code of this project is based on [Unused Resources Remover for Android](https://github.com/konifar/gradle-unused-resources-remover-plugin)

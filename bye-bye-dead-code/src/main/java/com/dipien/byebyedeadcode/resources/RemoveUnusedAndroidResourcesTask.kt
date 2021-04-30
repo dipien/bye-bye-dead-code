@@ -6,10 +6,10 @@ import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 
-open class RemoveUnusedResourcesTask : AbstractTask() {
+open class RemoveUnusedAndroidResourcesTask : AbstractTask() {
 
     companion object {
-        const val TASK_NAME = "removeUnusedResources"
+        const val TASK_NAME = "removeUnusedAndroidResources"
     }
 
     init {
@@ -22,12 +22,15 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
 
     @get:Input
     @get:Optional
-    var extraUnusedResourcesRemovers: List<AbstractRemover> = emptyList()
+    var unusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
 
     override fun onExecute() {
-        if (extraUnusedResourcesRemovers.isNotEmpty()) {
-            ColoredLogger.log("extraRemovers:")
-            extraUnusedResourcesRemovers.forEach {
+
+        // TODO Fail if an android project is not found
+
+        if (unusedResourcesExtraRemovers.isNotEmpty()) {
+            ColoredLogger.log("androidUnusedResourcesExtraRemovers:")
+            unusedResourcesExtraRemovers.forEach {
                 ColoredLogger.log("  $it")
             }
         }
@@ -41,6 +44,6 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
 
         ColoredLogger.log("dryRun: $dryRun")
 
-        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, extraUnusedResourcesRemovers)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, unusedResourcesExtraRemovers)
     }
 }
