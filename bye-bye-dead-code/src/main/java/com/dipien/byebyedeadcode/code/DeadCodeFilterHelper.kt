@@ -4,14 +4,12 @@ import org.gradle.api.Project
 
 class DeadCodeFilterHelper(
     project: Project,
-    compiledKotlinClassesDir: String,
-    compiledJavaClassesDir: String,
-    generatedClassesDir: String
+    filterContext: FilterContext
 ) {
 
     private val filters = listOf(
-            OwnSourceCodeFilter(project, compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir),
-            CompilerCodeFilter()
+            OwnSourceCodeFilter(project, filterContext),
+            CompilerCodeFilter(filterContext)
     )
 
     fun filter(deadCode: DeadCode): DeadCode? {

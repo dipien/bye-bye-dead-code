@@ -5,6 +5,8 @@ data class DeadCode(
     val classMembers: List<String>
 ) {
 
+    lateinit var moduleName: String
+
     fun classNameToPathAnnotation(): String = className.replace(".", "/")
 
     /**
