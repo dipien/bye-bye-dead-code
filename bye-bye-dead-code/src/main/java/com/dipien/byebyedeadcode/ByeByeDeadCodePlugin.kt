@@ -3,7 +3,7 @@ package com.dipien.byebyedeadcode
 import com.dipien.byebyedeadcode.code.GenerateDeadCodeReportTask
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.propertyResolver
-import com.dipien.byebyedeadcode.resources.RemoveUnusedResourcesTask
+import com.dipien.byebyedeadcode.resources.RemoveUnusedAndroidResourcesTask
 import com.dipien.byebyedeadcode.sourceset.CheckDebugOnProdTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,18 +32,18 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.generatedClassesDir = extension.generatedClassesDir
         }
 
-        val removeUnusedResourcesTask: RemoveUnusedResourcesTask = project.tasks.create(RemoveUnusedResourcesTask.TASK_NAME, RemoveUnusedResourcesTask::class.java)
+        val removeUnusedResourcesTask: RemoveUnusedAndroidResourcesTask = project.tasks.create(RemoveUnusedAndroidResourcesTask.TASK_NAME, RemoveUnusedAndroidResourcesTask::class.java)
         project.afterEvaluate {
             init(removeUnusedResourcesTask, extension)
-            removeUnusedResourcesTask.androidUnusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
-            removeUnusedResourcesTask.androidUnusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
+            removeUnusedResourcesTask.unusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
+            removeUnusedResourcesTask.unusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
         }
 
         val checkDebugOnProdTask: CheckDebugOnProdTask = project.tasks.create(CheckDebugOnProdTask.TASK_NAME, CheckDebugOnProdTask::class.java)
         project.afterEvaluate {
             init(checkDebugOnProdTask, extension)
-            checkDebugOnProdTask.androidUnusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
-            checkDebugOnProdTask.androidUnusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
+            checkDebugOnProdTask.unusedResourcesExtraRemovers = extension.androidUnusedResourcesExtraRemovers
+            checkDebugOnProdTask.unusedResourcesExcludeNames = extension.androidUnusedResourcesExcludeNames
         }
     }
 

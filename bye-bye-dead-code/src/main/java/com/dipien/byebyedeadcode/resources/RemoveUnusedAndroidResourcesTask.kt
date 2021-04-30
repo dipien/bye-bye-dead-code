@@ -6,7 +6,7 @@ import com.dipien.byebyedeadcode.resources.remover.AbstractRemover
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 
-open class RemoveUnusedResourcesTask : AbstractTask() {
+open class RemoveUnusedAndroidResourcesTask : AbstractTask() {
 
     companion object {
         const val TASK_NAME = "removeUnusedAndroidResources"
@@ -18,32 +18,32 @@ open class RemoveUnusedResourcesTask : AbstractTask() {
 
     @get:Input
     @get:Optional
-    var androidUnusedResourcesExcludeNames: List<String> = emptyList()
+    var unusedResourcesExcludeNames: List<String> = emptyList()
 
     @get:Input
     @get:Optional
-    var androidUnusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
+    var unusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
 
     override fun onExecute() {
 
         // TODO Fail if an android project is not found
 
-        if (androidUnusedResourcesExtraRemovers.isNotEmpty()) {
+        if (unusedResourcesExtraRemovers.isNotEmpty()) {
             ColoredLogger.log("androidUnusedResourcesExtraRemovers:")
-            androidUnusedResourcesExtraRemovers.forEach {
+            unusedResourcesExtraRemovers.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
-        if (androidUnusedResourcesExcludeNames.isNotEmpty()) {
+        if (unusedResourcesExcludeNames.isNotEmpty()) {
             ColoredLogger.log("excludeNames:")
-            androidUnusedResourcesExcludeNames.forEach {
+            unusedResourcesExcludeNames.forEach {
                 ColoredLogger.log("  $it")
             }
         }
 
         ColoredLogger.log("dryRun: $dryRun")
 
-        RemoveUnusedResourcesHelper.remove(project, dryRun, androidUnusedResourcesExcludeNames, androidUnusedResourcesExtraRemovers)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, unusedResourcesExtraRemovers)
     }
 }

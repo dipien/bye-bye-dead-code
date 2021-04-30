@@ -20,15 +20,15 @@ open class CheckDebugOnProdTask : AbstractTask() {
 
     @get:Input
     @get:Optional
-    var androidUnusedResourcesExcludeNames: List<String> = emptyList()
+    var unusedResourcesExcludeNames: List<String> = emptyList()
 
     @get:Input
     @get:Optional
-    var androidUnusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
+    var unusedResourcesExtraRemovers: List<AbstractRemover> = emptyList()
 
     override fun onExecute() {
 
-        RemoveUnusedResourcesHelper.remove(project, dryRun, androidUnusedResourcesExcludeNames, androidUnusedResourcesExtraRemovers)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, unusedResourcesExtraRemovers)
 
         // Remove all the non production code
         project.rootProject.allprojects.forEach {
@@ -37,7 +37,7 @@ open class CheckDebugOnProdTask : AbstractTask() {
             it.file("src/androidTest").deleteRecursively()
         }
 
-        RemoveUnusedResourcesHelper.remove(project, dryRun, androidUnusedResourcesExcludeNames, androidUnusedResourcesExtraRemovers)
+        RemoveUnusedResourcesHelper.remove(project, dryRun, unusedResourcesExcludeNames, unusedResourcesExtraRemovers)
 
         if (ResultsReport.getResults().isNotEmpty()) {
             project.logger.warn("**********************************************************************")
