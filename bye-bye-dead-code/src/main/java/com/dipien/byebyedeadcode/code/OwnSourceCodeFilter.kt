@@ -37,7 +37,7 @@ class OwnSourceCodeFilter(
             }
             // Java
             if (filterContext.isCompiledJavaClass(moduleName, targetPath) &&
-                    !filterContext.isGeneratedJAvaClass(moduleName, targetPath)) {
+                    !filterContext.isGeneratedJavaClass(moduleName, targetPath)) {
                 deadCode.moduleName = moduleName
                 result = deadCode
                 return@forEach

@@ -21,7 +21,7 @@ class FilterContext(
         return File("$moduleName/$generatedClassesDir/$targetPath.kt").exists()
     }
 
-    fun isGeneratedJAvaClass(moduleName: String, targetPath: String): Boolean {
+    fun isGeneratedJavaClass(moduleName: String, targetPath: String): Boolean {
         return File("$moduleName/$generatedClassesDir/$targetPath.java").exists()
     }
 
