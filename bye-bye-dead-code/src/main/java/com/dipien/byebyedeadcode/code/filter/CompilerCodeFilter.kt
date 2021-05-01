@@ -14,6 +14,14 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         // Member Filters
         // e.g: 'public final java.lang.String component1()'
         const val COMPONENT_N_FUNCTION = ".+final.+component\\d+\\(\\)"
+        // e.g: 'public com.example.MyClass copy(java.lang.String)'
+        // e.g: 'public final com.example.MyClass copy$default(java.lang.String)'
+        const val COPY_FUNCTION = ".+ copy(\\\$default)?\\(.+\\)"
+        // e.g: 'public final com.example.MyClass getMyClass()'
+        // e.g: 'public final boolean isEnabled()'
+        const val GET_FUNCTION = ".+ ([bB]oolean is|get).+\\(\\)"
+        // e.g: 'public final void setMyClass(com.example.MyClass)'
+        const val SET_FUNCTION = ".+ set[A-Z].+\\(.+\\)"
     }
 
     private val filters = listOf(
@@ -23,7 +31,10 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
             SuffixKtClassFilter(filterContext),
 
             // Member Filters
-            ClassMemberFilter(COMPONENT_N_FUNCTION.toRegex(), "ComponentNFunction")
+            ClassMemberFilter(COMPONENT_N_FUNCTION.toRegex(), "ComponentNFunction"),
+            ClassMemberFilter(COPY_FUNCTION.toRegex(), "CopyFunction"),
+            ClassMemberFilter(GET_FUNCTION.toRegex(), "GetFunction"),
+            ClassMemberFilter(SET_FUNCTION.toRegex(), "SetFunction")
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {
