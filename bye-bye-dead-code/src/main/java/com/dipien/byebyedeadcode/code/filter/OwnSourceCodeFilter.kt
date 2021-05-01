@@ -45,7 +45,7 @@ class OwnSourceCodeFilter(
             }
         }
         if (result == null) {
-            LoggerHelper.info("[SourceCodeFilter] Ignored: ${deadCode.className}")
+            LoggerHelper.info("[OwnSourceCode] Ignored: ${deadCode.className}")
         }
         return result
     }
