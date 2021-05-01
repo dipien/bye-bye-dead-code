@@ -1,4 +1,6 @@
-package com.dipien.byebyedeadcode.code
+package com.dipien.byebyedeadcode.code.filter
+
+import com.dipien.byebyedeadcode.code.DeadCode
 
 class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
 

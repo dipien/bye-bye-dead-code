@@ -1,5 +1,6 @@
-package com.dipien.byebyedeadcode.code
+package com.dipien.byebyedeadcode.code.filter
 
+import com.dipien.byebyedeadcode.code.DeadCode
 import com.dipien.byebyedeadcode.commons.LoggerHelper
 import org.gradle.api.Project
 

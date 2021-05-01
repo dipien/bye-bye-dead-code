@@ -1,5 +1,7 @@
 package com.dipien.byebyedeadcode.code
 
+import com.dipien.byebyedeadcode.code.filter.DeadCodeFilterHelper
+import com.dipien.byebyedeadcode.code.filter.FilterContext
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.LoggerHelper
 import org.gradle.api.tasks.Input
