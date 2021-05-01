@@ -1,4 +1,4 @@
-package com.dipien.byebyedeadcode.code
+package com.dipien.byebyedeadcode.code.filter
 
 import java.io.File
 

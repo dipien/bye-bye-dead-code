@@ -1,4 +1,6 @@
-package com.dipien.byebyedeadcode.code
+package com.dipien.byebyedeadcode.code.filter
+
+import com.dipien.byebyedeadcode.code.DeadCode
 
 /**
  * Filters out the code that cannot be removed from the source code. For
