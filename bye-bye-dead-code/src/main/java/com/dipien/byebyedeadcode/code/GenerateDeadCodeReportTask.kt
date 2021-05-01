@@ -29,14 +29,19 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
     @get:Input
     lateinit var generatedClassesDir: String
 
+    @get:Input
+    lateinit var srcDirs: List<String>
+
     override fun onExecute() {
         LoggerHelper.info("proguardUsageFilePath: $proguardUsageFilePath")
         LoggerHelper.info("reportFilePath: $reportFilePath")
         LoggerHelper.info("compiledKotlinClassesDir: $compiledKotlinClassesDir")
         LoggerHelper.info("compiledJavaClassesDir: $compiledJavaClassesDir")
         LoggerHelper.info("generatedClassesDir: $generatedClassesDir")
+        LoggerHelper.info("srcDirs: $srcDirs")
 
-        val deadCodeFilter = DeadCodeFilterHelper(project, compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir)
+        val filterContext = FilterContext(compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir, srcDirs)
+        val deadCodeFilter = DeadCodeFilterHelper(project, filterContext)
         val deadCodeReporter = DeadCodeReporter(reportFilePath)
         UsageFileParser(proguardUsageFilePath).parse { deadCode ->
             val filteredDeadCode = deadCodeFilter.filter(deadCode)

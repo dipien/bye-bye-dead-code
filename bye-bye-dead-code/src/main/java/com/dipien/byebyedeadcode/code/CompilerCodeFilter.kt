@@ -1,6 +1,6 @@
 package com.dipien.byebyedeadcode.code
 
-class CompilerCodeFilter : DeadCodeFilter {
+class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
 
     companion object {
         // Class Filters
@@ -13,7 +13,8 @@ class CompilerCodeFilter : DeadCodeFilter {
     private val filters = listOf(
             // Class Filters
             ClassNameFilter(ANONYMOUS_CLASS.toRegex(), "AnonymousClassFilter"),
-            ClassNameFilter(DEFAULT_IMPLES.toRegex(), "DefaultImplsFilter")
+            ClassNameFilter(DEFAULT_IMPLES.toRegex(), "DefaultImplsFilter"),
+            SuffixKtClassFilter(filterContext)
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {

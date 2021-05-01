@@ -30,6 +30,7 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.compiledKotlinClassesDir = extension.compiledKotlinClassesDir
             generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
             generateDeadCodeReportTask.generatedClassesDir = extension.generatedClassesDir
+            generateDeadCodeReportTask.srcDirs = extension.srcDirs
         }
 
         val removeUnusedResourcesTask: RemoveUnusedAndroidResourcesTask = project.tasks.create(RemoveUnusedAndroidResourcesTask.TASK_NAME, RemoveUnusedAndroidResourcesTask::class.java)

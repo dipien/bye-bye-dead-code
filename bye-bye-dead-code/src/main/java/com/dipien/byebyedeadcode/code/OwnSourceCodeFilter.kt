@@ -2,16 +2,13 @@ package com.dipien.byebyedeadcode.code
 
 import com.dipien.byebyedeadcode.commons.LoggerHelper
 import org.gradle.api.Project
-import java.io.File
 
 /**
  * Filters out kapt and library classes.
  */
 class OwnSourceCodeFilter(
     project: Project,
-    private val compiledKotlinClassesDir: String,
-    private val compiledJavaClassesDir: String,
-    private val generatedClassesDir: String
+    private val filterContext: FilterContext
 ) : DeadCodeFilter {
 
     private val moduleNames: List<String>
@@ -29,17 +26,19 @@ class OwnSourceCodeFilter(
 
         // For nested or inner classes if the root class is in the src directory then
         // the inner or nested class too. So, we are just going to check the root class.
-        val classPath = deadCode.rootClassNameToPathAnnotation()
+        val targetPath = deadCode.rootClassNameToPathAnnotation()
         moduleNames.forEach { moduleName ->
             // Kotlin
-            if (File("$moduleName/$compiledKotlinClassesDir/$classPath.class").exists() &&
-                    !File("$moduleName/$generatedClassesDir/$classPath.kt").exists()) {
+            if (filterContext.isCompiledKotlinClass(moduleName, targetPath) &&
+                    !filterContext.isGeneratedKotlinClass(moduleName, targetPath)) {
+                deadCode.moduleName = moduleName
                 result = deadCode
                 return@forEach
             }
             // Java
-            if (File("$moduleName/$compiledJavaClassesDir/$classPath.class").exists() &&
-                    !File("$moduleName/$generatedClassesDir/$classPath.java").exists()) {
+            if (filterContext.isCompiledJavaClass(moduleName, targetPath) &&
+                    !filterContext.isGeneratedJavaClass(moduleName, targetPath)) {
+                deadCode.moduleName = moduleName
                 result = deadCode
                 return@forEach
             }
