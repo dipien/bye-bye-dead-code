@@ -10,13 +10,20 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         const val ANONYMOUS_CLASS = ".+\\\$\\d+\$"
         // e.g: 'com.example.MyInterface$DefaultImpls'
         const val DEFAULT_IMPLES = ".+\\\$DefaultImpls\$"
+
+        // Member Filters
+        // e.g: 'public final java.lang.String component1()'
+        const val COMPONENT_N_FUNCTION = ".+final.+component\\d+\\(\\)"
     }
 
     private val filters = listOf(
             // Class Filters
-            ClassNameFilter(ANONYMOUS_CLASS.toRegex(), "AnonymousClassFilter"),
-            ClassNameFilter(DEFAULT_IMPLES.toRegex(), "DefaultImplsFilter"),
-            SuffixKtClassFilter(filterContext)
+            ClassNameFilter(ANONYMOUS_CLASS.toRegex(), "AnonymousClass"),
+            ClassNameFilter(DEFAULT_IMPLES.toRegex(), "DefaultImpls"),
+            SuffixKtClassFilter(filterContext),
+
+            // Member Filters
+            ClassMemberFilter(COMPONENT_N_FUNCTION.toRegex(), "ComponentNFunction")
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {

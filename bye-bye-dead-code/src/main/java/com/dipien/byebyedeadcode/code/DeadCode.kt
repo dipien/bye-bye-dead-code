@@ -2,7 +2,7 @@ package com.dipien.byebyedeadcode.code
 
 data class DeadCode(
     val className: String,
-    val classMembers: List<String>
+    val classMembers: MutableList<String>
 ) {
 
     lateinit var moduleName: String
