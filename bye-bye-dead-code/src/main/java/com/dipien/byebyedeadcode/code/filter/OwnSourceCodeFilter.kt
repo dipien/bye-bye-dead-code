@@ -25,21 +25,21 @@ class OwnSourceCodeFilter(
     override fun filter(deadCode: DeadCode): DeadCode? {
         var result: DeadCode? = null
 
-        // For nested or inner classes if the root class is in the src directory then
-        // the inner or nested class too. So, we are just going to check the root class.
-        val targetPath = deadCode.rootClassNameToPathAnnotation()
+        val targetPath = deadCode.classNameToPathAnnotation()
         moduleNames.forEach { moduleName ->
             // Kotlin
-            if (filterContext.isCompiledKotlinClass(moduleName, targetPath) &&
-                    !filterContext.isGeneratedKotlinClass(moduleName, targetPath)) {
+            val classFileKt = filterContext.createCompiledKotlinClass(moduleName, targetPath)
+            if (classFileKt.exists() && !filterContext.isGeneratedKotlinClass(moduleName, targetPath)) {
                 deadCode.moduleName = moduleName
+                deadCode.classFile = classFileKt
                 result = deadCode
                 return@forEach
             }
             // Java
-            if (filterContext.isCompiledJavaClass(moduleName, targetPath) &&
-                    !filterContext.isGeneratedJavaClass(moduleName, targetPath)) {
+            val classFile = filterContext.createCompiledJavaClass(moduleName, targetPath)
+            if (classFile.exists() && !filterContext.isGeneratedJavaClass(moduleName, targetPath)) {
                 deadCode.moduleName = moduleName
+                deadCode.classFile = classFile
                 result = deadCode
                 return@forEach
             }

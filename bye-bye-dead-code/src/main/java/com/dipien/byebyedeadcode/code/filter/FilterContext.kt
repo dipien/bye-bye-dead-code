@@ -9,12 +9,12 @@ class FilterContext(
     private val srcDirs: List<String>
 ) {
 
-    fun isCompiledKotlinClass(moduleName: String, targetPath: String): Boolean {
-        return File("$moduleName/$compiledKotlinClassesDir/$targetPath.class").exists()
+    fun createCompiledKotlinClass(moduleName: String, targetPath: String): File {
+        return File("$moduleName/$compiledKotlinClassesDir/$targetPath.class")
     }
 
-    fun isCompiledJavaClass(moduleName: String, targetPath: String): Boolean {
-        return File("$moduleName/$compiledJavaClassesDir/$targetPath.class").exists()
+    fun createCompiledJavaClass(moduleName: String, targetPath: String): File {
+        return File("$moduleName/$compiledJavaClassesDir/$targetPath.class")
     }
 
     fun isGeneratedKotlinClass(moduleName: String, targetPath: String): Boolean {
