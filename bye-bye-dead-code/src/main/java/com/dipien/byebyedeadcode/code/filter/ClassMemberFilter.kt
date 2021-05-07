@@ -10,15 +10,20 @@ class ClassMemberFilter(private val regex: Regex, private val name: String) : De
             return deadCode
         }
 
-        val membersToRemove = deadCode.classMembers.filter { it.matches(regex) }
-        if (membersToRemove.isNotEmpty()) {
-            LoggerHelper.info("[$name] Members ignored for class: ${deadCode.className}")
-            membersToRemove.forEach {
-                deadCode.classMembers.remove(it)
+        var isFirstIgnored = true
+        deadCode.classMembers.removeIf {
+            val ignore = it.matches(regex)
+            if (ignore) {
+                if (isFirstIgnored) {
+                    LoggerHelper.info("[$name] Members ignored for class: ${deadCode.className}")
+                    isFirstIgnored = false
+                }
                 LoggerHelper.info("[$name] $it")
             }
+            ignore
         }
-        return if (deadCode.classMembers.size == membersToRemove.size) {
+
+        return if (deadCode.classMembers.isEmpty()) {
             LoggerHelper.info("[$name] No members. Ignored: ${deadCode.className}")
             null
         } else {
