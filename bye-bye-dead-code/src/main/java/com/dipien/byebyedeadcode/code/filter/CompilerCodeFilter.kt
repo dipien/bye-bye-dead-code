@@ -24,6 +24,20 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         const val SET_FUNCTION = """.+ set[A-Z].+\(.+\)"""
         // e.g: 'public static final com.example.MyClass$Companion Companion'
         const val COMPANION_FIELD = """.+\${'$'}Companion Companion$"""
+        // e.g: 'public static final synthetic void access$setResumed$cp(int)'
+        const val ACCESS_FUNCTION = """^.+static final.+ access\$.+"""
+        /**
+         * Proguard removes some static variables because the bytecode does not
+         * use them, the compiler replaces its values in each place where the
+         * variable is used. So we do not know which of them are not used in
+         * the source code.
+         */
+        // e.g: 'private static final java.lang.String EXAMPLE'
+        const val STATIC_FIELD = """^.+static final[^)]+$"""
+        // e.g: 'public void <init>(com.example.MyClass)'
+        const val CONSTRUCTOR_FUNCTION = """.*void <init>\(.*"""
+        // e.g: 'static synthetic void init$default(com.example.MyClass)'
+        const val DEFAULT_FUNCTION = """.*\${'$'}default\(.*"""
     }
 
     private val filters = listOf(
@@ -37,7 +51,11 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
             ClassMemberFilter(COPY_FUNCTION.toRegex(), "CopyFunction"),
             ClassMemberFilter(GET_FUNCTION.toRegex(), "GetFunction"),
             ClassMemberFilter(SET_FUNCTION.toRegex(), "SetFunction"),
-            ClassMemberFilter(COMPANION_FIELD.toRegex(), "CompanionField")
+            ClassMemberFilter(COMPANION_FIELD.toRegex(), "CompanionField"),
+            ClassMemberFilter(ACCESS_FUNCTION.toRegex(), "AccessFunction"),
+            ClassMemberFilter(STATIC_FIELD.toRegex(), "StaticField"),
+            ClassMemberFilter(CONSTRUCTOR_FUNCTION.toRegex(), "ConstructorFunction"),
+            ClassMemberFilter(DEFAULT_FUNCTION.toRegex(), "DefaultFunction")
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {
