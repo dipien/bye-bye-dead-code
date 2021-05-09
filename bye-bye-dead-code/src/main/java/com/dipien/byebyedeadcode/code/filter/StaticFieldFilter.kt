@@ -12,7 +12,7 @@ import org.objectweb.asm.Opcodes
  * use them, the compiler replaces its values in each place where the
  * field is used. Since we do not know which of them are not used
  * in the source code, this class filters out static fields and
- * classes with only static fields.
+ * classes that only have static fields.
  */
 class StaticFieldFilter : DeadCodeFilter {
 
