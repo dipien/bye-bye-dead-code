@@ -11,7 +11,8 @@ class DeadCodeFilterHelper(
     private val filters = listOf(
             OwnSourceCodeFilter(project, filterContext),
             CompilerCodeFilter(filterContext),
-            AnnotationFilter()
+            AnnotationFilter(),
+            StaticFieldFilter()
     )
 
     fun filter(deadCode: DeadCode): DeadCode? {
