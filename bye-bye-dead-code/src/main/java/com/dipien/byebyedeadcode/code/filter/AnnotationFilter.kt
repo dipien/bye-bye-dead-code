@@ -8,8 +8,7 @@ import org.objectweb.asm.Opcodes
 class AnnotationFilter : DeadCodeFilter {
 
     override fun filter(deadCode: DeadCode): DeadCode? {
-        val reader = ClassReader(deadCode.classFile.readBytes())
-        return if (reader.isAnnotation()) {
+        return if (deadCode.classReader.isAnnotation()) {
             LoggerHelper.info("[AnnotationFilter] Ignored: ${deadCode.className}")
             null
         } else {
