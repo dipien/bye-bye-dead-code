@@ -14,10 +14,6 @@ parameters:
     type: boolean
     default: false
 
-  upgradeDependencies:
-    type: boolean
-    default: false
-
 references:
 
   working_dir: &working_dir
@@ -38,7 +34,8 @@ executors:
 orbs:
   # https://circleci.com/developer/orbs/orb/eddiewebb/queue
   queue: eddiewebb/queue@1.5.0
-  ruby: circleci/ruby@1.1.2
+  # https://circleci.com/developer/orbs/orb/circleci/ruby
+  ruby: circleci/ruby@1.1.4
 
 commands:
 
@@ -161,9 +158,6 @@ jobs:
       - run:
           name: Create GitHub Release
           command: ./gradlew :createGitHubRelease << pipeline.parameters.releaseGradleFlags >>
-      #      - run:
-      #          name: Generate Changelog
-      #          command: ./gradlew :generateChangelog << pipeline.parameters.releaseGradleFlags >>
       - run:
           name: Copy Signing secret key ring file
           command: sudo bash -c "echo '$SIGNING_SECRET_KEY_RING' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
@@ -179,14 +173,6 @@ jobs:
       - run:
           name: Send merge pull request
           command: ./gradlew sendMergePullRequest --stacktrace
-
-  upgradeDependencies:
-    executor: jdk_executor
-    steps:
-      - custom_checkout
-      - run:
-          name: Upgrade Dependencies
-          command: ./gradlew upgradeDependencies --stacktrace
 
 workflows:
   commit:
@@ -212,21 +198,6 @@ workflows:
             - test
             - validatePlugins
             - security
-  weekly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * 0"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - upgradeDependencies
-
-  upgradeDependencies:
-    when: << pipeline.parameters.upgradeDependencies >>
-    jobs:
-      - upgradeDependencies
 
   release:
     when: << pipeline.parameters.release >>
