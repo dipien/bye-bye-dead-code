@@ -15,7 +15,7 @@ buildscript {
 
 dependencies {
 	implementation localGroovy()
-	implementation 'org.jdom:jdom2:2.0.6'
+	implementation 'org.jdom:jdom2:2.0.6.1'
 	implementation(Libs.ASM)
 	implementation(Libs.ASM_UTILS)
 	implementation(Libs.ASM_COMMONS)
