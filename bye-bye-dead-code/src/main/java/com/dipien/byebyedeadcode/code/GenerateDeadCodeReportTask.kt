@@ -67,7 +67,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
             proguardUsageFilePath,
             compiledKotlinClassesDir,
             compiledJavaClassesDir,
-            generatedClassesDir,
+            generatedClassesDir
         ).apply {
             addAll(srcDirs)
         }
@@ -83,8 +83,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
 
         sourceSets.remove(null)
         if (sourceSets.size > 1) {
-            throw IllegalArgumentException("Some paths set on the extension contain different source set names, they can not refer to 'release' and 'debug' simultaneously.")
+            throw IllegalArgumentException("Some paths that were set on the extension contain different source set names, they can not refer to 'release' and 'debug' simultaneously.")
         }
     }
-
 }
