@@ -5,6 +5,7 @@ import com.dipien.byebyedeadcode.code.filter.FilterContext
 import com.dipien.byebyedeadcode.commons.AbstractTask
 import com.dipien.byebyedeadcode.commons.LoggerHelper
 import org.gradle.api.tasks.Input
+import java.io.File
 
 open class GenerateDeadCodeReportTask : AbstractTask() {
 
@@ -42,6 +43,8 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
         LoggerHelper.info("generatedClassesDir: $generatedClassesDir")
         LoggerHelper.info("srcDirs: $srcDirs")
 
+        validateSourceSets()
+
         val filterContext = FilterContext(compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDir, srcDirs)
         val deadCodeFilter = DeadCodeFilterHelper(project, filterContext)
         val deadCodeReporter = DeadCodeReporter(reportFilePath)
@@ -58,4 +61,30 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
         }
         deadCodeReporter.writeReport()
     }
+
+    private fun validateSourceSets() {
+        val paths = mutableListOf(
+            proguardUsageFilePath,
+            compiledKotlinClassesDir,
+            compiledJavaClassesDir,
+            generatedClassesDir,
+        ).apply {
+            addAll(srcDirs)
+        }
+
+        val sourceSets = paths.map {
+            val fileNames = it.split(File.separator)
+            when {
+                fileNames.contains("debug") -> "debug"
+                fileNames.contains("release") -> "release"
+                else -> null
+            }
+        }.toCollection(mutableSetOf())
+
+        sourceSets.remove(null)
+        if (sourceSets.size > 1) {
+            throw IllegalArgumentException("Some paths set on the extension contain different source set names, they can not refer to 'release' and 'debug' simultaneously.")
+        }
+    }
+
 }
