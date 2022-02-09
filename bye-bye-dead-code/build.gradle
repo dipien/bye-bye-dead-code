@@ -19,8 +19,8 @@ dependencies {
 	implementation(Libs.ASM)
 	implementation(Libs.ASM_UTILS)
 	implementation(Libs.ASM_COMMONS)
-	testCompile(Libs.JUNIT)
-	testCompile(Libs.TRUTH)
+	testImplementation(Libs.JUNIT)
+	testImplementation(Libs.TRUTH)
 }
 
 
