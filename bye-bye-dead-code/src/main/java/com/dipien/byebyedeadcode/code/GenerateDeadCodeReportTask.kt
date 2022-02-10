@@ -72,7 +72,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
             addAll(srcDirs)
         }
 
-        val sourceSets = paths.map {
+        val sourceSets = paths.mapNotNull {
             val fileNames = it.split(File.separator)
             when {
                 fileNames.contains("debug") -> "debug"
@@ -81,7 +81,6 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
             }
         }.toCollection(mutableSetOf())
 
-        sourceSets.remove(null)
         if (sourceSets.size > 1) {
             throw IllegalArgumentException("Some paths that were set on the extension contain different source set names, they can not refer to 'release' and 'debug' simultaneously.")
         }
