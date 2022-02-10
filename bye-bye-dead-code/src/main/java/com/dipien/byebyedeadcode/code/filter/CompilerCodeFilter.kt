@@ -15,8 +15,7 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         // e.g: 'public final java.lang.String component1()'
         const val COMPONENT_N_FUNCTION = """.+final.+component\d+\(\)"""
         // e.g: 'public com.example.MyClass copy(java.lang.String)'
-        // e.g: 'public final com.example.MyClass copy$default(java.lang.String)'
-        const val COPY_FUNCTION = """.+ copy(\${'$'}default)?\(.+\)"""
+        const val COPY_FUNCTION = """.+ copy\(.+\)"""
         // e.g: 'public final com.example.MyClass getMyClass()'
         // e.g: 'public final boolean isEnabled()'
         const val GET_FUNCTION = """.+ ([bB]oolean is|get).+\(\)"""
@@ -24,18 +23,16 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         const val SET_FUNCTION = """.+ set[A-Z].+\(.+\)"""
         // e.g: 'public static final com.example.MyClass$Companion Companion'
         const val COMPANION_FIELD = """.+\${'$'}Companion Companion$"""
-        // e.g: 'public static final synthetic void access$setResumed$cp(int)'
-        const val ACCESS_FUNCTION = """^.+static final.+ access\$.+"""
         // e.g: 'public void <init>(com.example.MyClass)'
         const val CONSTRUCTOR_FUNCTION = """.*void <init>\(.*"""
-        // e.g: 'static synthetic void init$default(com.example.MyClass)'
-        const val DEFAULT_FUNCTION = """.*\${'$'}default\(.*"""
         // e.g: 'public synthetic bridge void foo(java.lang.Object)'
         // e.g: 'public synthetic bridge java.lang.Object foo()'
         const val BRIDGE_FUNCTION = """^.+ bridge .+"""
         // e.g: 'private static synthetic void foo()'
         // e.g: 'public final synthetic void foo()'
         const val SYNTHETIC_FUNCTION = """^.+ synthetic .+"""
+        // Any function name that contains the symbol '$'
+        const val DOLLAR_FUNCTION = """^.*\${'$'}[^\s]+\(.*"""
     }
 
     private val filters = listOf(
@@ -50,11 +47,10 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
             ClassMemberFilter(GET_FUNCTION.toRegex(), "GetFunction"),
             ClassMemberFilter(SET_FUNCTION.toRegex(), "SetFunction"),
             ClassMemberFilter(COMPANION_FIELD.toRegex(), "CompanionField"),
-            ClassMemberFilter(ACCESS_FUNCTION.toRegex(), "AccessFunction"),
             ClassMemberFilter(CONSTRUCTOR_FUNCTION.toRegex(), "ConstructorFunction"),
-            ClassMemberFilter(DEFAULT_FUNCTION.toRegex(), "DefaultFunction"),
             ClassMemberFilter(BRIDGE_FUNCTION.toRegex(), "BridgeFunction"),
-            ClassMemberFilter(SYNTHETIC_FUNCTION.toRegex(), "SyntheticFunction")
+            ClassMemberFilter(SYNTHETIC_FUNCTION.toRegex(), "SyntheticFunction"),
+            ClassMemberFilter(DOLLAR_FUNCTION.toRegex(), "DollarFunction")
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {
