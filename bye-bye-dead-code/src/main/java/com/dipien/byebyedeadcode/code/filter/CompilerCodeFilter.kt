@@ -32,7 +32,10 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         const val DEFAULT_FUNCTION = """.*\${'$'}default\(.*"""
         // e.g: 'public synthetic bridge void foo(java.lang.Object)'
         // e.g: 'public synthetic bridge java.lang.Object foo()'
-        const val BRIDGE_FUNCTION = """^.+synthetic bridge.+"""
+        const val BRIDGE_FUNCTION = """^.+ bridge .+"""
+        // e.g: 'private static synthetic void foo()'
+        // e.g: 'public final synthetic void foo()'
+        const val SYNTHETIC_FUNCTION = """^.+ synthetic .+"""
     }
 
     private val filters = listOf(
@@ -50,7 +53,8 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
             ClassMemberFilter(ACCESS_FUNCTION.toRegex(), "AccessFunction"),
             ClassMemberFilter(CONSTRUCTOR_FUNCTION.toRegex(), "ConstructorFunction"),
             ClassMemberFilter(DEFAULT_FUNCTION.toRegex(), "DefaultFunction"),
-            ClassMemberFilter(BRIDGE_FUNCTION.toRegex(), "BridgeFunction")
+            ClassMemberFilter(BRIDGE_FUNCTION.toRegex(), "BridgeFunction"),
+            ClassMemberFilter(SYNTHETIC_FUNCTION.toRegex(), "SyntheticFunction")
     )
 
     override fun filter(deadCode: DeadCode): DeadCode? {
