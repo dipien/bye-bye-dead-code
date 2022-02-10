@@ -24,7 +24,8 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         // e.g: 'public static final com.example.MyClass$Companion Companion'
         const val COMPANION_FIELD = """.+\${'$'}Companion Companion$"""
         // e.g: 'public void <init>(com.example.MyClass)'
-        const val CONSTRUCTOR_FUNCTION = """.*void <init>\(.*"""
+        // e.g: 'public void <clinit>(com.example.MyClass)'
+        const val CONSTRUCTOR_FUNCTION = """.*void <(cl)?init>\(.*"""
         // e.g: 'public synthetic bridge void foo(java.lang.Object)'
         // e.g: 'public synthetic bridge java.lang.Object foo()'
         const val BRIDGE_FUNCTION = """^.+ bridge .+"""
