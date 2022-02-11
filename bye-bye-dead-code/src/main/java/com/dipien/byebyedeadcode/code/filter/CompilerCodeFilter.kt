@@ -20,7 +20,8 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
         // e.g: 'public final boolean isEnabled()'
         const val GET_FUNCTION = """.+ ([bB]oolean is|get).+\(\)"""
         // e.g: 'public final void setMyClass(com.example.MyClass)'
-        const val SET_FUNCTION = """.+ set[A-Z].+\(.+\)"""
+        // e.g: 'public final void set_myClass(com.example.MyClass)'
+        const val SET_FUNCTION = """.+ set([A-Z]|_[a-z]).+\(.+\)"""
         // e.g: 'public static final com.example.MyClass$Companion Companion'
         const val COMPANION_FIELD = """.+\${'$'}Companion Companion$"""
         // e.g: 'public void <init>(com.example.MyClass)'
