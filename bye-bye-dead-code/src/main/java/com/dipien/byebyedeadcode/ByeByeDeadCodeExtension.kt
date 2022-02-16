@@ -29,4 +29,7 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
             "src/main/java",
             "src/release/java"
     )
+
+    var ignoredClasses = listOf<String>()
+    var ignoredMembers = listOf<String>()
 }

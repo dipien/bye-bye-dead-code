@@ -9,6 +9,7 @@ class DeadCodeFilterHelper(
 ) {
 
     private val filters = listOf(
+            CustomFilter(filterContext.ignoredClasses, filterContext.ignoredMembers),
             OwnSourceCodeFilter(project, filterContext),
             CompilerCodeFilter(filterContext),
             AnnotationFilter(),
