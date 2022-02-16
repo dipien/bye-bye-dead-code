@@ -21,7 +21,10 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
     // Module dirs
     var compiledKotlinClassesDir = "build/tmp/kotlin-classes/release"
     var compiledJavaClassesDir = "build/intermediates/javac/release"
-    var generatedClassesDir = "build/generated/source/kapt/release"
+    var generatedClassesDirs = listOf(
+        "build/generated/source/kapt/release",
+        "build/generated/source/navigation-args/release"
+    )
     var srcDirs = listOf(
             "src/main/java",
             "src/release/java"

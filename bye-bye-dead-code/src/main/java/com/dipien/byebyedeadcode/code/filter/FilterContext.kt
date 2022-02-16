@@ -5,7 +5,7 @@ import java.io.File
 class FilterContext(
     private val compiledKotlinClassesDir: String,
     private val compiledJavaClassesDir: String,
-    private val generatedClassesDir: String,
+    private val generatedClassesDirs: List<String>,
     private val srcDirs: List<String>
 ) {
 
@@ -18,11 +18,15 @@ class FilterContext(
     }
 
     fun isGeneratedKotlinClass(moduleName: String, targetPath: String): Boolean {
-        return File("$moduleName/$generatedClassesDir/$targetPath.kt").exists()
+        return generatedClassesDirs.any { generatedClassesDir ->
+            File("$moduleName/$generatedClassesDir/$targetPath.kt").exists()
+        }
     }
 
     fun isGeneratedJavaClass(moduleName: String, targetPath: String): Boolean {
-        return File("$moduleName/$generatedClassesDir/$targetPath.java").exists()
+        return generatedClassesDirs.any { generatedClassesDir ->
+            File("$moduleName/$generatedClassesDir/$targetPath.java").exists()
+        }
     }
 
     fun isSrcCode(moduleName: String, targetPath: String): Boolean {

@@ -29,7 +29,7 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.reportFilePath = extension.reportFilePath
             generateDeadCodeReportTask.compiledKotlinClassesDir = extension.compiledKotlinClassesDir
             generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
-            generateDeadCodeReportTask.generatedClassesDir = extension.generatedClassesDir
+            generateDeadCodeReportTask.generatedClassesDirs = extension.generatedClassesDirs
             generateDeadCodeReportTask.srcDirs = extension.srcDirs
         }
 
