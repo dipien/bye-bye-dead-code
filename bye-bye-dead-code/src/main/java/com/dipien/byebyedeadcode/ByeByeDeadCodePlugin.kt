@@ -31,6 +31,7 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
             generateDeadCodeReportTask.generatedClassesDirs = extension.generatedClassesDirs
             generateDeadCodeReportTask.srcDirs = extension.srcDirs
+            generateDeadCodeReportTask.ignore = extension.ignore
         }
 
         val removeUnusedResourcesTask: RemoveUnusedAndroidResourcesTask = project.tasks.create(RemoveUnusedAndroidResourcesTask.TASK_NAME, RemoveUnusedAndroidResourcesTask::class.java)
