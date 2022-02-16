@@ -2,9 +2,9 @@ package com.dipien.byebyedeadcode.code.filter
 
 import com.dipien.byebyedeadcode.code.DeadCode
 
-class CustomFilter(ignore : List<String>) : DeadCodeFilter {
+class CustomFilter(ignore: List<String>) : DeadCodeFilter {
 
-    private var filters : List<DeadCodeFilter>
+    private var filters: List<DeadCodeFilter>
 
     init {
         val filtersAux = mutableListOf<DeadCodeFilter>()
@@ -26,5 +26,4 @@ class CustomFilter(ignore : List<String>) : DeadCodeFilter {
         }
         return result
     }
-
 }
