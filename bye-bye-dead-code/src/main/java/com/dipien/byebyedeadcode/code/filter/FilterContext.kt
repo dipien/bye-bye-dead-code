@@ -7,7 +7,8 @@ class FilterContext(
     private val compiledJavaClassesDir: String,
     private val generatedClassesDirs: List<String>,
     private val srcDirs: List<String>,
-    val ignore: List<String>
+    val ignoredClasses: List<String>,
+    val ignoredMembers: List<String>
 ) {
 
     fun createCompiledKotlinClass(moduleName: String, targetPath: String): File {

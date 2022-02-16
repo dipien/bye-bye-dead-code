@@ -2,16 +2,17 @@ package com.dipien.byebyedeadcode.code.filter
 
 import com.dipien.byebyedeadcode.code.DeadCode
 
-class CustomFilter(ignore: List<String>) : DeadCodeFilter {
+class CustomFilter(ignoredClasses: List<String>, ignoredMembers: List<String>) : DeadCodeFilter {
 
     private var filters: List<DeadCodeFilter>
 
     init {
         val filtersAux = mutableListOf<DeadCodeFilter>()
-        ignore.forEach {
-            val regex = it.toRegex()
-            filtersAux.add(ClassNameFilter(regex, "RegexFilter"))
-            filtersAux.add(ClassMemberFilter(regex, "RegexFilter"))
+        ignoredClasses.forEach {
+            filtersAux.add(ClassNameFilter(it.toRegex(), "CustomClassFilter"))
+        }
+        ignoredMembers.forEach {
+            filtersAux.add(ClassMemberFilter(it.toRegex(), "CustomMemberFilter"))
         }
         this.filters = filtersAux
     }

@@ -30,6 +30,6 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
             "src/release/java"
     )
 
-    // Add regex to exclude classes and methods from the report
-    var ignore = listOf<String>()
+    var ignoredClasses = listOf<String>()
+    var ignoredMembers = listOf<String>()
 }
