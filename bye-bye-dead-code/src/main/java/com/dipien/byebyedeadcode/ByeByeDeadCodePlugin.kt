@@ -25,7 +25,7 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
         val generateDeadCodeReportTask: GenerateDeadCodeReportTask = project.tasks.create(GenerateDeadCodeReportTask.TASK_NAME, GenerateDeadCodeReportTask::class.java)
         project.afterEvaluate {
             init(generateDeadCodeReportTask, extension)
-            generateDeadCodeReportTask.proguardUsageFilePath = extension.proguardUsageFilePath
+            generateDeadCodeReportTask.r8UsageFilePath = extension.r8UsageFilePath
             generateDeadCodeReportTask.reportFilePath = extension.reportFilePath
             generateDeadCodeReportTask.compiledKotlinClassesDir = extension.compiledKotlinClassesDir
             generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
