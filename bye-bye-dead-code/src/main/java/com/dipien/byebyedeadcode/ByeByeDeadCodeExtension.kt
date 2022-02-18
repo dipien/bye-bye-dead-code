@@ -25,10 +25,6 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
         "build/generated/source/kapt/release",
         "build/generated/source/navigation-args/release"
     )
-    var srcDirs = listOf(
-            "src/main/java",
-            "src/release/java"
-    )
 
     var ignoredClasses = listOf<String>()
     var ignoredMembers = listOf<String>()
