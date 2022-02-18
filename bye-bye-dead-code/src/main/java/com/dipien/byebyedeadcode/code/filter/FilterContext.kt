@@ -6,7 +6,6 @@ class FilterContext(
     private val compiledKotlinClassesDir: String,
     private val compiledJavaClassesDir: String,
     private val generatedClassesDirs: List<String>,
-    private val srcDirs: List<String>,
     val ignoredClasses: List<String>,
     val ignoredMembers: List<String>
 ) {
@@ -31,13 +30,10 @@ class FilterContext(
         }
     }
 
-    fun isSrcCode(moduleName: String, targetPath: String): Boolean {
-        for (srcDir in srcDirs) {
-            if (File("$moduleName/$srcDir/$targetPath.kt").exists() ||
-                    File("$moduleName/$srcDir/$targetPath.java").exists()) {
-                return true
-            }
-        }
-        return false
+    fun isStoredInSrcDir(moduleName: String, targetPath: String): Boolean {
+        val srcDir = "$moduleName/src"
+        return File(srcDir).list()?.any {
+            File("$srcDir/$it/java/$targetPath.kt").exists()
+        } ?: false
     }
 }

@@ -41,7 +41,7 @@ class CompilerCodeFilter(filterContext: FilterContext) : DeadCodeFilter {
             // Class Filters
             ClassNameFilter(ANONYMOUS_CLASS.toRegex(), "AnonymousClass"),
             ClassNameFilter(DEFAULT_IMPLES.toRegex(), "DefaultImpls"),
-            SuffixKtClassFilter(filterContext),
+            KotlinExtensionFilter(filterContext),
 
             // Member Filters
             ClassMemberFilter(COMPONENT_N_FUNCTION.toRegex(), "ComponentNFunction"),

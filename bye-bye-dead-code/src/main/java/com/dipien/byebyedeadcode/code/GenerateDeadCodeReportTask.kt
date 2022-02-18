@@ -33,9 +33,6 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
     lateinit var generatedClassesDirs: List<String>
 
     @get:Input
-    lateinit var srcDirs: List<String>
-
-    @get:Input
     lateinit var ignoredClasses: List<String>
 
     @get:Input
@@ -47,13 +44,12 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
         LoggerHelper.info("compiledKotlinClassesDir: $compiledKotlinClassesDir")
         LoggerHelper.info("compiledJavaClassesDir: $compiledJavaClassesDir")
         LoggerHelper.info("generatedClassesDirs: $generatedClassesDirs")
-        LoggerHelper.info("srcDirs: $srcDirs")
         LoggerHelper.info("ignoredClasses: $ignoredClasses")
         LoggerHelper.info("ignoredMembers: $ignoredMembers")
 
         validateSourceSets()
 
-        val filterContext = FilterContext(compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDirs, srcDirs, ignoredClasses, ignoredMembers)
+        val filterContext = FilterContext(compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDirs, ignoredClasses, ignoredMembers)
         val deadCodeFilter = DeadCodeFilterHelper(project, filterContext)
         val deadCodeReporter = DeadCodeReporter(reportFilePath)
         UsageFileParser(proguardUsageFilePath).parse { deadCode ->
@@ -77,7 +73,6 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
             compiledJavaClassesDir
         ).apply {
             addAll(generatedClassesDirs)
-            addAll(srcDirs)
         }
 
         val sourceSets = paths.mapNotNull {

@@ -30,7 +30,6 @@ open class ByeByeDeadCodePlugin : Plugin<Project> {
             generateDeadCodeReportTask.compiledKotlinClassesDir = extension.compiledKotlinClassesDir
             generateDeadCodeReportTask.compiledJavaClassesDir = extension.compiledJavaClassesDir
             generateDeadCodeReportTask.generatedClassesDirs = extension.generatedClassesDirs
-            generateDeadCodeReportTask.srcDirs = extension.srcDirs
             generateDeadCodeReportTask.ignoredClasses = extension.ignoredClasses
             generateDeadCodeReportTask.ignoredMembers = extension.ignoredMembers
         }
