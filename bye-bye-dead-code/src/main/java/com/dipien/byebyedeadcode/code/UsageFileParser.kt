@@ -2,9 +2,9 @@ package com.dipien.byebyedeadcode.code
 
 import java.io.File
 
-class UsageFileParser(proguardUsageFilePath: String) {
+class UsageFileParser(r8UsageFilePath: String) {
 
-    private val proguardUsageFile = File(proguardUsageFilePath)
+    private val r8UsageFile = File(r8UsageFilePath)
 
     private var ready: DeadCode? = null
 
@@ -30,7 +30,7 @@ class UsageFileParser(proguardUsageFilePath: String) {
     }
 
     fun parse(block: (DeadCode) -> Unit) {
-        proguardUsageFile.forEachLine { line ->
+        r8UsageFile.forEachLine { line ->
             parseLine(line)
             next()?.let { deadCode ->
                 block(deadCode)

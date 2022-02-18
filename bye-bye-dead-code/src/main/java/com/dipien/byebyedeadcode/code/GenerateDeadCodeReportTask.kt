@@ -18,7 +18,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
     }
 
     @get:Input
-    lateinit var proguardUsageFilePath: String
+    lateinit var r8UsageFilePath: String
 
     @get:Input
     lateinit var reportFilePath: String
@@ -39,7 +39,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
     lateinit var ignoredMembers: List<String>
 
     override fun onExecute() {
-        LoggerHelper.info("proguardUsageFilePath: $proguardUsageFilePath")
+        LoggerHelper.info("r8UsageFilePath: $r8UsageFilePath")
         LoggerHelper.info("reportFilePath: $reportFilePath")
         LoggerHelper.info("compiledKotlinClassesDir: $compiledKotlinClassesDir")
         LoggerHelper.info("compiledJavaClassesDir: $compiledJavaClassesDir")
@@ -52,7 +52,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
         val filterContext = FilterContext(compiledKotlinClassesDir, compiledJavaClassesDir, generatedClassesDirs, ignoredClasses, ignoredMembers)
         val deadCodeFilter = DeadCodeFilterHelper(project, filterContext)
         val deadCodeReporter = DeadCodeReporter(reportFilePath)
-        UsageFileParser(proguardUsageFilePath).parse { deadCode ->
+        UsageFileParser(r8UsageFilePath).parse { deadCode ->
             val filteredDeadCode = deadCodeFilter.filter(deadCode)
             filteredDeadCode?.let {
                 // If the class has no members then it is a dead class and can be completely removed
@@ -68,7 +68,7 @@ open class GenerateDeadCodeReportTask : AbstractTask() {
 
     private fun validateSourceSets() {
         val paths = mutableListOf(
-            proguardUsageFilePath,
+            r8UsageFilePath,
             compiledKotlinClassesDir,
             compiledJavaClassesDir
         ).apply {
