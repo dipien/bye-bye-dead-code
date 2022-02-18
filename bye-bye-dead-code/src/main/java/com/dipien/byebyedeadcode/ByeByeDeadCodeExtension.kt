@@ -16,7 +16,7 @@ open class ByeByeDeadCodeExtension(propertyResolver: PropertyResolver) {
     // Lists the code that was stripped by R8
     var proguardUsageFilePath = "app/build/outputs/mapping/release/usage.txt"
 
-    var reportFilePath = "app/build/outputs/bye_dead_code/dead_code.txt"
+    var reportFilePath = "app/build/outputs/dead_code/usage.txt"
 
     // Module dirs
     var compiledKotlinClassesDir = "build/tmp/kotlin-classes/release"
